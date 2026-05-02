@@ -1,0 +1,25 @@
+{
+  "name": "WebDev Reference",
+  "short_name": "WebDev Ref",
+  "description": "JS / HTML5 / Three.js / CSS リファレンス",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080818",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "developer"]
+}

@@ -1,0 +1,3457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebDev Reference — JS / HTML5 / Three.js / CSS</title>
+  <meta name="theme-color" content="#6366f1" />
+  <meta name="description" content="JS / HTML5 / Three.js / CSS リファレンス" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="WebDev Ref" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+
+  <!-- Three.js Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">&#9670;</span>
+      <span class="logo-text">WebDev Ref</span>
+    </div>
+    <div class="sidebar-search">
+      <input type="text" id="search-input" placeholder="検索..." autocomplete="off" />
+      <span class="search-icon">&#128269;</span>
+    </div>
+    <ul class="nav-chapters" id="nav-chapters">
+      <li class="nav-group-label">Chapter 1 — JavaScript</li>
+      <li class="nav-item active" data-target="js-basics"><span class="nav-dot"></span>JavaScript 基礎</li>
+      <li class="nav-item" data-target="js-async"><span class="nav-dot"></span>非同期処理</li>
+      <li class="nav-item" data-target="js-scope"><span class="nav-dot"></span>スコープ / クロージャ</li>
+      <li class="nav-item" data-target="js-prototype"><span class="nav-dot"></span>プロトタイプ / クラス</li>
+      <li class="nav-item" data-target="js-modules"><span class="nav-dot"></span>ES Modules</li>
+      <li class="nav-item" data-target="js-generators"><span class="nav-dot"></span>Generators</li>
+      <li class="nav-item" data-target="js-patterns"><span class="nav-dot"></span>デザインパターン</li>
+      <li class="nav-item" data-target="js-proxy"><span class="nav-dot"></span>Proxy / Reflect</li>
+      <li class="nav-item" data-target="js-errors"><span class="nav-dot"></span>Error Handling</li>
+      <li class="nav-item" data-target="js-regexp"><span class="nav-dot"></span>Regular Expressions</li>
+      <li class="nav-item" data-target="js-fetch"><span class="nav-dot"></span>Fetch API</li>
+      <li class="nav-group-label">Chapter 2 — HTML5 API</li>
+      <li class="nav-item" data-target="html5-canvas"><span class="nav-dot"></span>Canvas API</li>
+      <li class="nav-item" data-target="html5-webgl"><span class="nav-dot"></span>WebGL 入門</li>
+      <li class="nav-item" data-target="html5-worker"><span class="nav-dot"></span>Web Workers</li>
+      <li class="nav-item" data-target="html5-storage"><span class="nav-dot"></span>Storage API</li>
+      <li class="nav-item" data-target="html5-websocket"><span class="nav-dot"></span>WebSocket</li>
+      <li class="nav-item" data-target="html5-observers"><span class="nav-dot"></span>Observer APIs</li>
+      <li class="nav-item" data-target="html5-audio"><span class="nav-dot"></span>Web Audio API</li>
+      <li class="nav-item" data-target="html5-file"><span class="nav-dot"></span>File / Drag&amp;Drop</li>
+      <li class="nav-item" data-target="html5-clipboard"><span class="nav-dot"></span>Clipboard API</li>
+      <li class="nav-item" data-target="html5-geo"><span class="nav-dot"></span>Geolocation / History</li>
+      <li class="nav-group-label">Chapter 3 — Three.js</li>
+      <li class="nav-item" data-target="threejs-scene"><span class="nav-dot"></span>Scene / Camera</li>
+      <li class="nav-item" data-target="threejs-geometry"><span class="nav-dot"></span>Geometry / Material</li>
+      <li class="nav-item" data-target="threejs-light"><span class="nav-dot"></span>Light / Shadow</li>
+      <li class="nav-item" data-target="threejs-animation"><span class="nav-dot"></span>Animation Loop</li>
+      <li class="nav-item" data-target="threejs-texture"><span class="nav-dot"></span>Textures / UV</li>
+      <li class="nav-item" data-target="threejs-raycasting"><span class="nav-dot"></span>Raycasting</li>
+      <li class="nav-item" data-target="threejs-shader"><span class="nav-dot"></span>ShaderMaterial</li>
+      <li class="nav-item" data-target="threejs-gltf"><span class="nav-dot"></span>GLTF Loader</li>
+      <li class="nav-item" data-target="threejs-postprocessing"><span class="nav-dot"></span>Post-processing</li>
+      <li class="nav-item" data-target="threejs-instanced"><span class="nav-dot"></span>Instanced Mesh</li>
+      <li class="nav-item" data-target="threejs-envmap"><span class="nav-dot"></span>Environment Map</li>
+      <li class="nav-group-label">Chapter 4 — Modern CSS</li>
+      <li class="nav-item" data-target="css-grid"><span class="nav-dot"></span>CSS Grid</li>
+      <li class="nav-item" data-target="css-variables"><span class="nav-dot"></span>CSS Variables</li>
+      <li class="nav-item" data-target="css-animation"><span class="nav-dot"></span>CSS Animations</li>
+      <li class="nav-item" data-target="css-flexbox"><span class="nav-dot"></span>CSS Flexbox</li>
+      <li class="nav-item" data-target="css-container"><span class="nav-dot"></span>Container Queries</li>
+      <li class="nav-item" data-target="css-scroll"><span class="nav-dot"></span>Scroll Animations</li>
+      <li class="nav-group-label">Chapter 5 — TypeScript</li>
+      <li class="nav-item" data-target="ts-basics"><span class="nav-dot"></span>型 / Interface</li>
+      <li class="nav-item" data-target="ts-generics"><span class="nav-dot"></span>Generics</li>
+      <li class="nav-item" data-target="ts-utility"><span class="nav-dot"></span>Utility Types</li>
+      <li class="nav-item" data-target="ts-advanced"><span class="nav-dot"></span>型ガード / 高度な型</li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section id="hero" class="hero-section">
+      <div class="hero-inner">
+        <div class="hero-badge reveal">Web Technology</div>
+        <h1 class="hero-title reveal">
+          <span class="gradient-text">JavaScript</span> &amp;<br />
+          <span class="gradient-text-2">Three.js</span> リファレンス
+        </h1>
+        <p class="hero-sub reveal">HTML5 / JavaScript / Three.js の重要概念をインタラクティブに学ぶ教科書型リファレンス</p>
+        <div class="hero-stats reveal">
+          <div class="stat"><span class="stat-num">5</span><span class="stat-label">Chapters</span></div>
+          <div class="stat"><span class="stat-num">42</span><span class="stat-label">Topics</span></div>
+          <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Examples</span></div>
+        </div>
+        <button class="hero-btn reveal" onclick="scrollToContent()">始める <span>&#8595;</span></button>
+      </div>
+      <div class="hero-3d-demo" id="hero-demo"></div>
+    </section>
+
+    <!-- Chapter 1: JavaScript -->
+    <div class="chapter-header reveal" id="chapter-1">
+      <span class="chapter-num">Chapter 01</span>
+      <h2>JavaScript</h2>
+      <p>現代のWeb開発の核となるJavaScriptの重要概念</p>
+    </div>
+
+    <!-- JS Basics -->
+    <section class="topic-section reveal" id="js-basics">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">JS</div>
+        <div>
+          <h3 class="topic-title">JavaScript 基礎</h3>
+          <p class="topic-desc">型・変数・関数・配列操作の基本</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">変数宣言</div>
+          <pre><code class="language-javascript">// let: 再代入可能
+let count = 0;
+count = 1;
+
+// const: 再代入不可（推奨）
+const PI = 3.14159;
+
+// var: 関数スコープ（非推奨）
+var old = "avoid this";</code></pre>
+          <p class="card-note">現代のJSでは <code>const</code> を基本に、変化する値のみ <code>let</code> を使う。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">アロー関数</div>
+          <pre><code class="language-javascript">// 従来の関数
+function add(a, b) {
+  return a + b;
+}
+
+// アロー関数（簡潔）
+const add = (a, b) => a + b;
+
+// thisを束縛しない
+const obj = {
+  name: "Alice",
+  greet: function() {
+    setTimeout(() => {
+      console.log(this.name); // "Alice"
+    }, 100);
+  }
+};</code></pre>
+          <p class="card-note">アロー関数は自身の <code>this</code> を持たず、外側のスコープを参照する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">配列メソッド</div>
+          <pre><code class="language-javascript">const nums = [1, 2, 3, 4, 5];
+
+// map: 変換
+const doubled = nums.map(n => n * 2);
+// [2, 4, 6, 8, 10]
+
+// filter: 絞り込み
+const evens = nums.filter(n => n % 2 === 0);
+// [2, 4]
+
+// reduce: 集約
+const sum = nums.reduce((acc, n) => acc + n, 0);
+// 15</code></pre>
+          <p class="card-note"><code>map/filter/reduce</code> は不変データ操作の基本。元の配列を変更しない。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">分割代入 / スプレッド</div>
+          <pre><code class="language-javascript">// 配列の分割代入
+const [first, second, ...rest] = [1, 2, 3, 4];
+
+// オブジェクトの分割代入
+const { name, age, ...others } = user;
+
+// スプレッド演算子
+const arr2 = [...arr1, 4, 5];
+const obj2 = { ...obj1, newProp: "val" };</code></pre>
+          <p class="card-note">ES6の強力な構文。コードを簡潔かつ読みやすくする。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS Async -->
+    <section class="topic-section reveal" id="js-async">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">⟳</div>
+        <div>
+          <h3 class="topic-title">非同期処理</h3>
+          <p class="topic-desc">Promise・async/await・イベントループ</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Promise</div>
+          <pre><code class="language-javascript">const fetchData = (url) => {
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
+};
+
+// チェーン
+fetchData("/api/users")
+  .then(users => users.filter(u => u.active))
+  .then(active => console.log(active))
+  .catch(err => console.error(err));</code></pre>
+          <p class="card-note">Promiseは<strong>保留(pending)・履行(fulfilled)・拒否(rejected)</strong>の3状態を持つ。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">async / await</div>
+          <pre><code class="language-javascript">// Promiseをより同期的に書ける
+async function loadUser(id) {
+  try {
+    const res = await fetch(`/api/users/${id}`);
+    if (!res.ok) throw new Error("Not found");
+    const user = await res.json();
+    return user;
+  } catch (err) {
+    console.error("Error:", err);
+    throw err;
+  }
+}
+
+// 並列実行
+const [users, posts] = await Promise.all([
+  fetchUsers(),
+  fetchPosts()
+]);</code></pre>
+          <p class="card-note"><code>Promise.all</code> で並列実行、<code>Promise.allSettled</code> で全結果を収集。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">イベントループ</div>
+          <pre><code class="language-javascript">console.log("1");          // 同期
+
+setTimeout(() => {
+  console.log("2");        // マクロタスク
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("3");        // マイクロタスク
+});
+
+console.log("4");          // 同期
+
+// 出力順: 1 → 4 → 3 → 2</code></pre>
+          <p class="card-note">マイクロタスク（Promise）はマクロタスク（setTimeout）より先に処理される。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS Scope -->
+    <section class="topic-section reveal" id="js-scope">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">&#x1F517;</div>
+        <div>
+          <h3 class="topic-title">スコープ / クロージャ</h3>
+          <p class="topic-desc">変数の有効範囲とクロージャの仕組み</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">クロージャ</div>
+          <pre><code class="language-javascript">function makeCounter(initial = 0) {
+  let count = initial; // プライベートな状態
+
+  return {
+    increment: () => ++count,
+    decrement: () => --count,
+    value: () => count,
+    reset: () => { count = initial; }
+  };
+}
+
+const counter = makeCounter(10);
+counter.increment(); // 11
+counter.increment(); // 12
+counter.value();     // 12</code></pre>
+          <p class="card-note">クロージャにより、外部から直接アクセスできない「プライベート状態」を実現できる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">モジュールパターン</div>
+          <pre><code class="language-javascript">// IIFE でスコープを隔離
+const Store = (() => {
+  const _data = new Map(); // プライベート
+
+  return {
+    set(key, val) { _data.set(key, val); },
+    get(key)      { return _data.get(key); },
+    has(key)      { return _data.has(key); },
+    size()        { return _data.size; }
+  };
+})();
+
+Store.set("theme", "dark");
+Store.get("theme"); // "dark"</code></pre>
+          <p class="card-note">ES Modules（import/export）登場以前のパターン。現在も即時実行で有用。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS Prototype -->
+    <section class="topic-section reveal" id="js-prototype">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">&#x25CB;</div>
+        <div>
+          <h3 class="topic-title">プロトタイプ / クラス</h3>
+          <p class="topic-desc">JSの継承モデルとclass構文</p>
+        </div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">class 構文</div>
+          <pre><code class="language-javascript">class Animal {
+  #name; // プライベートフィールド
+
+  constructor(name) {
+    this.#name = name;
+  }
+
+  speak() {
+    return `${this.#name} makes a sound.`;
+  }
+
+  get name() { return this.#name; }
+}
+
+class Dog extends Animal {
+  speak() {
+    return `${this.name} barks!`;
+  }
+}
+
+const d = new Dog("Rex");
+d.speak(); // "Rex barks!"</code></pre>
+          <p class="card-note"><code>#</code> プレフィックスでネイティブなプライベートフィールドを定義できる（ES2022）。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">プロトタイプチェーン</div>
+          <pre><code class="language-javascript">// classはプロトタイプの糖衣構文
+function Vehicle(type) {
+  this.type = type;
+}
+Vehicle.prototype.describe = function() {
+  return `This is a ${this.type}`;
+};
+
+const car = new Vehicle("car");
+car.describe(); // "This is a car"
+
+// プロトタイプチェーンを確認
+Object.getPrototypeOf(car) === Vehicle.prototype; // true
+car instanceof Vehicle; // true</code></pre>
+          <p class="card-note">JSの全オブジェクトはプロトタイプチェーンで連結されており、<code>Object.prototype</code> が頂点。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── JS: Proxy / Reflect ──────────────────── -->
+    <section class="topic-section reveal" id="js-proxy">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">P</div>
+        <div><h3 class="topic-title">Proxy / Reflect</h3><p class="topic-desc">オブジェクト操作をインターセプトしてカスタム動作を注入</p></div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本トラップ</div>
+          <pre><code class="language-javascript">const handler = {
+  get(target, key, receiver) {
+    console.log(`get: ${key}`);
+    return Reflect.get(target, key, receiver);
+  },
+  set(target, key, value, receiver) {
+    if (typeof value !== "number")
+      throw new TypeError(`${key} must be a number`);
+    return Reflect.set(target, key, value, receiver);
+  },
+  has(target, key) { return Reflect.has(target, key); },
+  deleteProperty(target, key) {
+    console.log(`delete: ${key}`);
+    return Reflect.deleteProperty(target, key);
+  }
+};
+const point = new Proxy({ x: 1, y: 2 }, handler);
+point.x;        // get: x → 1
+point.z = "a";  // TypeError!
+"x" in point;   // true</code></pre>
+          <p class="card-note">Proxyは<strong>13種類のトラップ</strong>を提供。get/set/has/deleteProperty/apply/constructなどあらゆるオブジェクト操作をフックできる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">リアクティブProxy</div>
+          <pre><code class="language-javascript">// Vue 3のreactiveに近い実装
+function reactive(obj, onChange) {
+  return new Proxy(obj, {
+    get(target, key) {
+      const val = Reflect.get(target, key);
+      return val && typeof val === "object"
+        ? reactive(val, onChange) : val;
+    },
+    set(target, key, value) {
+      const old = target[key];
+      const ok  = Reflect.set(target, key, value);
+      if (old !== value) onChange(key, value, old);
+      return ok;
+    }
+  });
+}
+const state = reactive({ count: 0 },
+  (k, v) => console.log(`${k}: ${v}`));
+state.count++; // "count: 1"</code></pre>
+          <p class="card-note">Vue 3の<code>reactive()</code>はProxyを使ってリアクティブなデータバインディングを実現している。ネストしたオブジェクトも再帰的にラップする。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Reflect API</div>
+          <pre><code class="language-javascript">const obj = { a: 1, b: 2 };
+
+Reflect.get(obj, "a");              // 1
+Reflect.set(obj, "c", 3);           // true
+Reflect.has(obj, "a");              // true
+Reflect.deleteProperty(obj, "b");   // true
+Reflect.ownKeys(obj);               // ["a", "c"]
+
+// apply / construct
+Reflect.apply(Math.max, null, [1, 3, 2]); // 3
+Reflect.construct(Date, ["2024-01-01"]);
+
+// defineProperty
+Reflect.defineProperty(obj, "id", {
+  value: 42, writable: false, enumerable: true
+});
+// ProxyトラップとReflectは1対1対応
+// → デフォルト動作を委譲しつつ副作用を加えられる</code></pre>
+          <p class="card-note">Proxyトラップ内で<code>Reflect</code>を使うとデフォルト動作を正確に委譲できる。直接オブジェクトを操作するより例外安全。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── JS: Error Handling ────────────────────── -->
+    <section class="topic-section reveal" id="js-errors">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">!</div>
+        <div><h3 class="topic-title">Error Handling</h3><p class="topic-desc">カスタムエラー・エラーチェーン・Result型パターン</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">カスタムエラークラス</div>
+          <pre><code class="language-javascript">class AppError extends Error {
+  constructor(message, code, status = 500) {
+    super(message);
+    this.name   = "AppError";
+    this.code   = code;
+    this.status = status;
+    Error.captureStackTrace?.(this, AppError);
+  }
+}
+class NotFoundError extends AppError {
+  constructor(resource) {
+    super(`${resource} not found`, "NOT_FOUND", 404);
+    this.name = "NotFoundError";
+  }
+}
+class ValidationError extends AppError {
+  constructor(fields) {
+    super("Validation failed", "VALIDATION", 422);
+    this.name   = "ValidationError";
+    this.fields = fields;
+  }
+}
+try {
+  throw new NotFoundError("User");
+} catch (e) {
+  if (e instanceof NotFoundError) console.log(e.status); // 404
+  if (e instanceof AppError)      console.log(e.code);
+}</code></pre>
+          <p class="card-note"><code>instanceof</code>チェックを使うために必ず<code>extends Error</code>でカスタムエラーを定義する。文字列を<code>throw</code>するのは避ける。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">エラーチェーン / cause</div>
+          <pre><code class="language-javascript">// ES2022: cause で元のエラーを保持
+async function fetchUser(id) {
+  try {
+    const res = await fetch(`/api/users/${id}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (cause) {
+    throw new AppError(
+      `Failed to fetch user ${id}`,
+      "FETCH_ERROR", 500, { cause }
+    );
+  }
+}
+// エラーチェーンを辿る
+function getRootCause(err) {
+  return err.cause ? getRootCause(err.cause) : err;
+}
+// AggregateError（複数エラーをまとめる）
+const errs = [new Error("A"), new Error("B")];
+throw new AggregateError(errs, "Multiple failures");
+// err.errors → [Error("A"), Error("B")]</code></pre>
+          <p class="card-note"><code>{ cause }</code>でエラーチェーンを形成できる（ES2022）。<code>Promise.any</code>は全拒否時に<code>AggregateError</code>をthrowする。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Result型パターン</div>
+          <pre><code class="language-javascript">// 例外を投げずResult型で返すパターン
+const ok  = (value) => ({ ok: true,  value });
+const err = (error) => ({ ok: false, error });
+
+async function safeParseJSON(str) {
+  try   { return ok(JSON.parse(str)); }
+  catch (e) { return err(e); }
+}
+async function safeFetch(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return err(new Error(`HTTP ${res.status}`));
+    return ok(await res.json());
+  } catch (e) { return err(e); }
+}
+
+// 呼び出し元で安全に処理
+const result = await safeFetch("/api/data");
+if (!result.ok) {
+  console.error(result.error);
+  return;
+}
+console.log(result.value); // 型安全にアクセス</code></pre>
+          <p class="card-note">Result型はRust由来のパターン。例外の代わりに戻り値でエラーを扱い、呼び出し元にエラー処理を強制できる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── JS: Regular Expressions ───────────────── -->
+    <section class="topic-section reveal" id="js-regexp">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">/./</div>
+        <div><h3 class="topic-title">Regular Expressions</h3><p class="topic-desc">パターンマッチング・名前付きグループ・フラグ</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本構文とフラグ</div>
+          <pre><code class="language-javascript">// リテラル記法
+const re = /hello/i;  // i=大文字小文字無視
+
+// コンストラクタ（動的パターン）
+const word = "world";
+const re2  = new RegExp(`\\b${word}\\b`, "gi");
+
+// フラグ一覧
+// g — グローバル（全マッチ）
+// i — 大文字小文字無視
+// m — 複数行 (^/$ が行頭末に)
+// s — dotAll（. が改行にもマッチ）
+// u — Unicode対応
+// d — マッチ位置のインデックスを返す
+
+// メソッド
+/^\d+$/.test("123");           // true
+"hello world".match(/\w+/g);  // ["hello", "world"]
+"a1b2".replace(/\d/g, "#");   // "a#b#"
+"a,,b".split(/,+/);            // ["a", "b"]</code></pre>
+          <p class="card-note">動的なパターンには<code>RegExp</code>コンストラクタを使う。<code>\\</code>でバックスラッシュをエスケープする必要がある点に注意。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">名前付きグループ・先読み</div>
+          <pre><code class="language-javascript">// 名前付きキャプチャグループ (?&lt;name&gt;...)
+const dateRe = /(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})/;
+const m = "2024-01-15".match(dateRe);
+m.groups.year;  // "2024"
+m.groups.month; // "01"
+
+// 先読み / 後読み（Lookahedd / Lookbehind）
+/\d+(?= dollars)/.exec("100 dollars"); // "100"
+/\d+(?! euros)/.exec("100 dollars");   // "100"
+/(?&lt;=\$)\d+/.exec("$100");            // "100"
+/(?&lt;!\$)\d+/.exec("€100");            // "100"
+
+// matchAll（gフラグ必須、全キャプチャを反復）
+const re = /(?&lt;word&gt;\w+)/g;
+for (const m of "foo bar".matchAll(re)) {
+  console.log(m.groups.word); // "foo", "bar"
+}</code></pre>
+          <p class="card-note">名前付きグループ<code>(?&lt;name&gt;...)</code>はES2018。<code>matchAll</code>はgフラグが必須で全マッチのイテレーターを返す。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">高度な replace</div>
+          <pre><code class="language-javascript">// コールバック版 replace
+const result = "hello world".replace(
+  /(\w+)/g,
+  (match, p1, offset) =>
+    p1.charAt(0).toUpperCase() + p1.slice(1)
+);
+// "Hello World"
+
+// 名前付きグループで置換
+"2024-01-15".replace(
+  /(?&lt;y&gt;\d{4})-(?&lt;m&gt;\d{2})-(?&lt;d&gt;\d{2})/,
+  "$&lt;d&gt;/$&lt;m&gt;/$&lt;y&gt;"
+); // "15/01/2024"
+
+// URLスラッグ生成
+const slug = (str) => str
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[̀-ͯ]/g, "")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-|-$/g, "");
+slug("Hello, World!"); // "hello-world"</code></pre>
+          <p class="card-note"><code>replace</code>のコールバックはマッチ全体・各グループ・オフセット・元の文字列を受け取る。複雑な変換に有効。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── JS: Fetch API ─────────────────────────── -->
+    <section class="topic-section reveal" id="js-fetch">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">↓</div>
+        <div><h3 class="topic-title">Fetch API / AbortController</h3><p class="topic-desc">HTTP通信・エラー処理・キャンセル・ストリーミング</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本 fetch + エラー処理</div>
+          <pre><code class="language-javascript">// fetch は HTTP エラーで reject しない → 手動チェックが必要
+async function get(url) {
+  const res = await fetch(url, {
+    headers: { "Accept": "application/json" }
+  });
+  if (!res.ok)
+    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+  return res.json();
+}
+// POST
+async function post(url, data) {
+  const res = await fetch(url, {
+    method:  "POST",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+// FormData（ファイルアップロード）
+const form = new FormData();
+form.append("file", fileInput.files[0]);
+await fetch("/upload", { method: "POST", body: form });</code></pre>
+          <p class="card-note"><code>fetch</code>はネットワーク障害でのみrejectする。404/500でもresolveするため<code>res.ok</code>チェックが必須。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">AbortController / タイムアウト</div>
+          <pre><code class="language-javascript">// 手動キャンセル
+const controller = new AbortController();
+const { signal } = controller;
+
+fetch("/api/data", { signal })
+  .catch(e => {
+    if (e.name === "AbortError") console.log("Cancelled");
+  });
+setTimeout(() => controller.abort(), 5000);
+
+// タイムアウト（Node 18+ / モダンブラウザ）
+const res = await fetch("/api/slow", {
+  signal: AbortSignal.timeout(5000),
+});
+
+// 複数シグナルの合成
+const signal2 = AbortSignal.any([
+  AbortSignal.timeout(5000),
+  userController.signal,
+]);
+
+// React / useEffect でのクリーンアップ
+useEffect(() => {
+  const ctrl = new AbortController();
+  fetchData({ signal: ctrl.signal });
+  return () => ctrl.abort(); // コンポーネントアンマウント時
+}, []);</code></pre>
+          <p class="card-note"><code>AbortSignal.timeout(ms)</code>が最も簡潔なタイムアウト実装。コンポーネント破棄時のリクエストキャンセルはメモリリーク防止に必須。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">ストリーミングレスポンス</div>
+          <pre><code class="language-javascript">async function* streamResponse(url) {
+  const res     = await fetch(url);
+  const reader  = res.body.getReader();
+  const decoder = new TextDecoder();
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      yield decoder.decode(value, { stream: true });
+    }
+  } finally {
+    reader.releaseLock();
+  }
+}
+// LLMのストリーミングレスポンス処理
+for await (const chunk of streamResponse("/api/ai")) {
+  output.textContent += chunk;
+}
+
+// Response のメソッド
+res.json();        // JSON として解析
+res.text();        // テキスト
+res.blob();        // Blob（画像など）
+res.arrayBuffer(); // バイナリ
+res.formData();    // FormData</code></pre>
+          <p class="card-note">LLM APIのストリーミングや大きなファイル転送に<code>ReadableStream</code>と非同期ジェネレーターの組み合わせが有効。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 2: HTML5 -->
+    <div class="chapter-header reveal" id="chapter-2">
+      <span class="chapter-num">Chapter 02</span>
+      <h2>HTML5 API</h2>
+      <p>ブラウザが提供する強力なネイティブAPI群</p>
+    </div>
+
+    <!-- Canvas -->
+    <section class="topic-section reveal" id="html5-canvas">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#9633;</div>
+        <div>
+          <h3 class="topic-title">Canvas API</h3>
+          <p class="topic-desc">2Dグラフィックスをピクセルレベルで描画</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本描画</div>
+          <pre><code class="language-javascript">const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+// 矩形
+ctx.fillStyle = "#6366f1";
+ctx.fillRect(10, 10, 100, 60);
+
+// 円
+ctx.beginPath();
+ctx.arc(200, 40, 30, 0, Math.PI * 2);
+ctx.fillStyle = "#ec4899";
+ctx.fill();
+
+// テキスト
+ctx.font = "bold 20px Inter";
+ctx.fillStyle = "#fff";
+ctx.fillText("Canvas!", 300, 50);</code></pre>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">アニメーション</div>
+          <pre><code class="language-javascript">let x = 0;
+
+function animate() {
+  // 前フレームをクリア
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 描画
+  ctx.beginPath();
+  ctx.arc(x, 100, 20, 0, Math.PI * 2);
+  ctx.fillStyle = "#6366f1";
+  ctx.fill();
+
+  x = (x + 2) % canvas.width;
+
+  requestAnimationFrame(animate);
+}
+
+animate();</code></pre>
+          <p class="card-note"><code>requestAnimationFrame</code> はモニターのリフレッシュレートに同期して呼ばれる（通常60fps）。</p>
+        </div>
+        <div class="card reveal-card canvas-demo-card">
+          <div class="card-label">ライブデモ</div>
+          <canvas id="demo-canvas" width="320" height="160"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- WebGL -->
+    <section class="topic-section reveal" id="html5-webgl">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#9651;</div>
+        <div>
+          <h3 class="topic-title">WebGL 入門</h3>
+          <p class="topic-desc">GPUを使った3Dレンダリングの仕組み</p>
+        </div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">WebGLパイプライン</div>
+          <pre><code class="language-javascript">const gl = canvas.getContext("webgl2");
+
+// 頂点シェーダー（GLSL）
+const vertSrc = `#version 300 es
+in vec4 a_position;
+void main() {
+  gl_Position = a_position;
+}`;
+
+// フラグメントシェーダー（GLSL）
+const fragSrc = `#version 300 es
+precision highp float;
+out vec4 outColor;
+void main() {
+  outColor = vec4(0.4, 0.4, 1.0, 1.0);
+}`;
+
+// シェーダーをコンパイル＆リンク
+const program = createProgram(gl, vertSrc, fragSrc);
+gl.useProgram(program);</code></pre>
+          <p class="card-note">WebGLはGPUに直接命令を送る低レベルAPI。Three.jsはこれを抽象化している。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">VAO / VBO</div>
+          <pre><code class="language-javascript">// 頂点データ（三角形）
+const positions = new Float32Array([
+   0.0,  0.5,   // 頂点1
+  -0.5, -0.5,   // 頂点2
+   0.5, -0.5,   // 頂点3
+]);
+
+// VBO（頂点バッファ）
+const vbo = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+// VAO（属性レイアウト）
+const vao = gl.createVertexArray();
+gl.bindVertexArray(vao);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Web Workers -->
+    <section class="topic-section reveal" id="html5-worker">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#9881;</div>
+        <div>
+          <h3 class="topic-title">Web Workers</h3>
+          <p class="topic-desc">バックグラウンドスレッドで重い処理を分離</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Worker の作成</div>
+          <pre><code class="language-javascript">// worker.js
+self.onmessage = (e) => {
+  const { data } = e;
+  // 重い計算（メインスレッドをブロックしない）
+  const result = heavyComputation(data);
+  self.postMessage({ result });
+};
+
+function heavyComputation(n) {
+  let sum = 0;
+  for (let i = 0; i < n; i++) sum += i;
+  return sum;
+}
+
+// main.js
+const worker = new Worker("worker.js");
+worker.postMessage(1_000_000_000);
+worker.onmessage = (e) => {
+  console.log("Result:", e.data.result);
+};</code></pre>
+          <p class="card-note">WorkerはDOMにアクセスできない。データはコピー（または<code>Transferable</code>）で渡される。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HTML5: Web Audio API ──────────────────── -->
+    <section class="topic-section reveal" id="html5-audio">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#9834;</div>
+        <div><h3 class="topic-title">Web Audio API</h3><p class="topic-desc">ブラウザで音声を生成・処理・可視化する</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">AudioContext / OscillatorNode</div>
+          <pre><code class="language-javascript">// ユーザー操作後に作成（autoplay制限）
+const ctx = new AudioContext();
+
+// オシレーター（音波生成）
+const osc  = ctx.createOscillator();
+osc.type   = "sine"; // sine/square/sawtooth/triangle
+osc.frequency.value = 440; // A4（ラ）
+
+// GainNode（音量制御）
+const gain = ctx.createGain();
+gain.gain.value = 0.3;
+
+// グラフ: osc → gain → スピーカー
+osc.connect(gain);
+gain.connect(ctx.destination);
+osc.start();
+
+// フェードアウト
+gain.gain.setTargetAtTime(0, ctx.currentTime + 0.5, 0.3);
+osc.stop(ctx.currentTime + 2);</code></pre>
+          <p class="card-note">Web Audio APIは<strong>ノードグラフ</strong>で処理チェーンを構築する。<code>ctx.destination</code>がスピーカー出力。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">AnalyserNode（周波数可視化）</div>
+          <pre><code class="language-javascript">const analyser = ctx.createAnalyser();
+analyser.fftSize = 256;
+source.connect(analyser);
+analyser.connect(ctx.destination);
+
+const bufLen  = analyser.frequencyBinCount; // 128
+const dataArr = new Uint8Array(bufLen);
+
+function drawSpectrum() {
+  requestAnimationFrame(drawSpectrum);
+  analyser.getByteFrequencyData(dataArr); // 0-255
+
+  ctx2d.clearRect(0, 0, W, H);
+  const barW = W / bufLen;
+  dataArr.forEach((val, i) => {
+    const barH = (val / 255) * H;
+    ctx2d.fillStyle = `hsl(${i * 2}, 80%, 50%)`;
+    ctx2d.fillRect(i * barW, H - barH, barW - 1, barH);
+  });
+}
+drawSpectrum();</code></pre>
+          <p class="card-note"><code>AnalyserNode</code>は音声データを変更せず、周波数スペクトル・波形データを取得できる。音楽ビジュアライザーに使う。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">AudioBufferSourceNode（ファイル再生）</div>
+          <pre><code class="language-javascript">async function playAudio(url) {
+  const arrayBuffer = await (await fetch(url)).arrayBuffer();
+  const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+
+  const source = ctx.createBufferSource();
+  source.buffer = audioBuffer;
+  source.playbackRate.value = 1.0;
+
+  source.connect(ctx.destination);
+  source.start(0);
+  // start(when, offset, duration)
+  // start(0, 0.5, 3) — 0.5秒目から3秒間再生
+
+  source.onended = () => console.log("Done");
+}
+
+// マイク入力
+const stream = await navigator.mediaDevices
+  .getUserMedia({ audio: true });
+const micSource = ctx.createMediaStreamSource(stream);</code></pre>
+          <p class="card-note"><code>AudioBufferSourceNode</code>は一度しか再生できない。再生のたびに新しいノードを作成する。ループはプロパティで設定する。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HTML5: File API / Drag & Drop ─────────── -->
+    <section class="topic-section reveal" id="html5-file">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#128193;</div>
+        <div><h3 class="topic-title">File API / Drag &amp; Drop</h3><p class="topic-desc">ファイルの読み込み・ドラッグ操作・バリデーション</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">File input + FileReader</div>
+          <pre><code class="language-javascript">input.addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  console.log(file.name, file.size, file.type);
+
+  // テキスト読み込み（Promise版）
+  const text   = await file.text();
+
+  // バイナリ
+  const buffer = await file.arrayBuffer();
+
+  // DataURL（画像プレビュー）
+  const reader = new FileReader();
+  reader.onload = (e) => { img.src = e.target.result; };
+  reader.readAsDataURL(file);
+
+  // ObjectURL（大きなファイル向け）
+  const url = URL.createObjectURL(file);
+  video.src = url;
+  // 使い終わったら必ず解放
+  URL.revokeObjectURL(url);
+});</code></pre>
+          <p class="card-note"><code>file.text()</code>/<code>file.arrayBuffer()</code>はPromiseを返す新しいAPI。<code>createObjectURL</code>で一時URLを作成できるが必ず<code>revokeObjectURL</code>で解放する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Drag &amp; Drop ゾーン</div>
+          <pre><code class="language-javascript">const zone = document.getElementById("drop-zone");
+
+["dragenter", "dragover"].forEach(ev =>
+  zone.addEventListener(ev, (e) => {
+    e.preventDefault();
+    zone.classList.add("active");
+  })
+);
+["dragleave", "drop"].forEach(ev =>
+  zone.addEventListener(ev, () =>
+    zone.classList.remove("active"))
+);
+
+zone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  const files = [...e.dataTransfer.files];
+  files.forEach(processFile);
+
+  // ディレクトリのサポート
+  const items = [...e.dataTransfer.items];
+  for (const item of items) {
+    const entry = item.webkitGetAsEntry?.();
+    if (entry?.isDirectory) readDir(entry);
+  }
+});</code></pre>
+          <p class="card-note"><code>dragover</code>で<code>preventDefault()</code>を忘れるとドロップが無効になる。ブラウザデフォルトの「ファイルを開く」動作を阻止するため必須。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">ファイルバリデーション</div>
+          <pre><code class="language-javascript">const ALLOWED = ["image/jpeg", "image/png", "image/webp"];
+const MAX_MB  = 5;
+
+function validateFile(file) {
+  const errors = [];
+  if (!ALLOWED.includes(file.type))
+    errors.push(`許可形式: ${ALLOWED.join(", ")}`);
+  if (file.size > MAX_MB * 1024 * 1024)
+    errors.push(`最大サイズ: ${MAX_MB}MB`);
+  return errors;
+}
+
+// 画像の寸法チェック
+async function checkImageDimensions(file) {
+  const url = URL.createObjectURL(file);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve({ w: img.naturalWidth, h: img.naturalHeight });
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}</code></pre>
+          <p class="card-note">MIMEタイプはユーザーが偽装できる。サーバー側でもマジックバイトを検証する必要がある。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HTML5: Clipboard API ───────────────────── -->
+    <section class="topic-section reveal" id="html5-clipboard">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#128203;</div>
+        <div><h3 class="topic-title">Clipboard API</h3><p class="topic-desc">テキスト・画像のコピー&amp;ペースト操作</p></div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">非同期 Clipboard API</div>
+          <pre><code class="language-javascript">// テキストをコピー（HTTPS必須）
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast("Copied!");
+  } catch (err) {
+    console.error("Copy failed:", err);
+  }
+}
+
+// テキストを貼り付け（ユーザー操作内で呼ぶ）
+const text = await navigator.clipboard.readText();
+
+// 画像をコピー
+async function copyImage(blob) {
+  const item = new ClipboardItem({ [blob.type]: blob });
+  await navigator.clipboard.write([item]);
+}
+
+// 複数形式でコピー
+await navigator.clipboard.write([
+  new ClipboardItem({
+    "text/plain": new Blob(["Hello"], { type: "text/plain" }),
+    "text/html":  new Blob(
+      ["&lt;b&gt;Hello&lt;/b&gt;"], { type: "text/html" }),
+  })
+]);</code></pre>
+          <p class="card-note">Clipboard APIはHTTPS環境とページのフォーカスが必要。<code>readText()</code>はユーザー操作（クリック等）内で呼ぶ必要がある。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">copy / paste イベント</div>
+          <pre><code class="language-javascript">// コピー時に内容を加工
+document.addEventListener("copy", (e) => {
+  const sel = window.getSelection().toString();
+  if (!sel) return;
+  e.clipboardData.setData(
+    "text/plain",
+    `${sel}\n\n— 引用元: ${location.href}`
+  );
+  e.preventDefault();
+});
+
+// 貼り付け時にファイル取得（スクリーンショット対応）
+document.addEventListener("paste", (e) => {
+  const files = [...e.clipboardData.files];
+  if (files.length > 0) {
+    files.forEach(file => {
+      if (file.type.startsWith("image/")) {
+        handlePastedImage(file);
+      }
+    });
+    e.preventDefault();
+    return;
+  }
+  const text = e.clipboardData.getData("text/plain");
+  handlePastedText(text);
+});</code></pre>
+          <p class="card-note"><code>clipboardData.files</code>でスクリーンショットやコピーした画像を直接取得できる。チャット・エディターのUI実装に使う。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HTML5: Geolocation / History ──────────── -->
+    <section class="topic-section reveal" id="html5-geo">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#128205;</div>
+        <div><h3 class="topic-title">Geolocation / History API</h3><p class="topic-desc">位置情報の取得とSPAルーティングの実装</p></div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Geolocation API</div>
+          <pre><code class="language-javascript">// 現在地を一度取得
+navigator.geolocation.getCurrentPosition(
+  ({ coords }) => {
+    const { latitude, longitude, accuracy } = coords;
+    console.log(`${latitude}, ${longitude} ±${accuracy}m`);
+  },
+  (error) => {
+    // 1=PERMISSION_DENIED 2=UNAVAILABLE 3=TIMEOUT
+    console.error(error.code, error.message);
+  },
+  { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+);
+
+// 継続的に監視
+const watchId = navigator.geolocation.watchPosition(
+  (pos) => updateMap(pos.coords),
+  (err) => console.error(err)
+);
+navigator.geolocation.clearWatch(watchId);
+
+// 許可状態の確認
+const perm = await navigator.permissions
+  .query({ name: "geolocation" });
+perm.state; // "granted" | "prompt" | "denied"</code></pre>
+          <p class="card-note"><code>enableHighAccuracy: true</code>はGPSを使うためバッテリー消費が増す。<code>maximumAge</code>でキャッシュされた位置を使う時間を指定できる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">History API（SPAルーティング）</div>
+          <pre><code class="language-javascript">// ページ遷移なしにURLを変更
+history.pushState(
+  { page: "about", id: 1 }, // stateオブジェクト
+  "",                        // title（現在ブラウザが無視）
+  "/about"                   // 新しいURL
+);
+// 現在の履歴エントリを置き換え
+history.replaceState({ page: "home" }, "", "/");
+
+// 前後移動
+history.back();
+history.forward();
+history.go(-2);
+
+// ブラウザの戻る/進むで発火
+window.addEventListener("popstate", (e) => {
+  console.log("URL:", location.pathname);
+  console.log("State:", e.state);
+  renderPage(location.pathname);
+});
+
+// 現在のstate
+history.state; // 最後にpush/replaceしたオブジェクト</code></pre>
+          <p class="card-note">React RouterなどのSPAルーターはHistory APIの上に構築されている。<code>popstate</code>イベントで戻る/進むを処理する。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 3: Three.js -->
+    <div class="chapter-header reveal" id="chapter-3">
+      <span class="chapter-num">Chapter 03</span>
+      <h2>Three.js</h2>
+      <p>WebGLを抽象化した3Dグラフィックスライブラリ</p>
+    </div>
+
+    <!-- Three.js Scene -->
+    <section class="topic-section reveal" id="threejs-scene">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">3D</div>
+        <div>
+          <h3 class="topic-title">Scene / Camera / Renderer</h3>
+          <p class="topic-desc">Three.jsの3大構成要素</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">セットアップ</div>
+          <pre><code class="language-javascript">import * as THREE from 'three';
+
+// 1. シーン（3D空間）
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a1a);
+
+// 2. カメラ（視点）
+const camera = new THREE.PerspectiveCamera(
+  75,                           // 視野角(FOV)
+  window.innerWidth / window.innerHeight, // アスペクト比
+  0.1,                          // near クリップ
+  1000                          // far クリップ
+);
+camera.position.set(0, 0, 5);
+
+// 3. レンダラー（描画エンジン）
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);</code></pre>
+          <p class="card-note">PerspectiveCamera は透視投影（遠近感あり）。平行投影は <code>OrthographicCamera</code>。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">レスポンシブ対応</div>
+          <pre><code class="language-javascript">function onResize() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+}
+
+window.addEventListener("resize", onResize);</code></pre>
+          <p class="card-note">リサイズ時は必ず <code>updateProjectionMatrix()</code> を呼ぶ。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three.js Geometry -->
+    <section class="topic-section reveal" id="threejs-geometry">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#9671;</div>
+        <div>
+          <h3 class="topic-title">Geometry / Material / Mesh</h3>
+          <p class="topic-desc">3Dオブジェクトを構成する3要素</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本ジオメトリ</div>
+          <pre><code class="language-javascript">// BoxGeometry(幅, 高さ, 奥行き)
+const box = new THREE.BoxGeometry(1, 1, 1);
+
+// SphereGeometry(半径, 横分割, 縦分割)
+const sphere = new THREE.SphereGeometry(0.5, 32, 32);
+
+// TorusGeometry(半径, チューブ半径, ...)
+const torus = new THREE.TorusGeometry(1, 0.3, 16, 100);
+
+// カスタム BufferGeometry
+const geo = new THREE.BufferGeometry();
+const vertices = new Float32Array([...]);
+geo.setAttribute("position",
+  new THREE.BufferAttribute(vertices, 3));</code></pre>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">マテリアル</div>
+          <pre><code class="language-javascript">// 標準マテリアル（PBR）
+const mat = new THREE.MeshStandardMaterial({
+  color: 0x6366f1,
+  metalness: 0.3,    // 金属感 0〜1
+  roughness: 0.4,    // 粗さ  0〜1
+  wireframe: false,
+});
+
+// シンプル（ライト不要）
+const basic = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  transparent: true,
+  opacity: 0.8,
+});
+
+// Mesh = Geometry + Material
+const mesh = new THREE.Mesh(box, mat);
+scene.add(mesh);</code></pre>
+          <p class="card-note"><code>MeshStandardMaterial</code> はPBR（物理ベースレンダリング）でリアルな質感を表現。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Three.jsライブデモ</div>
+          <div id="threejs-demo" class="threejs-demo-container"></div>
+          <p class="card-note">ドラッグで回転 / スクロールでズーム</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three.js Light -->
+    <section class="topic-section reveal" id="threejs-light">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#9788;</div>
+        <div>
+          <h3 class="topic-title">Light / Shadow</h3>
+          <p class="topic-desc">ライティングでリアリティを加える</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">ライトの種類</div>
+          <pre><code class="language-javascript">// 環境光（全体を均一に照らす）
+const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+
+// 点光源（電球のように全方向）
+const point = new THREE.PointLight(0xffffff, 1, 100);
+point.position.set(5, 5, 5);
+
+// 平行光（太陽光のように平行）
+const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+dir.position.set(10, 10, 5);
+dir.castShadow = true;
+
+// スポットライト
+const spot = new THREE.SpotLight(0xffffff, 1);
+spot.angle = Math.PI / 6;
+spot.penumbra = 0.2;
+
+scene.add(ambient, point, dir, spot);</code></pre>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">シャドウの設定</div>
+          <pre><code class="language-javascript">// レンダラーでシャドウを有効化
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+// 影を落とすオブジェクト
+mesh.castShadow = true;
+
+// 影を受けるオブジェクト
+ground.receiveShadow = true;
+
+// DirectionalLightのシャドウ範囲設定
+dir.shadow.mapSize.set(2048, 2048);
+dir.shadow.camera.near = 0.5;
+dir.shadow.camera.far = 50;
+dir.shadow.camera.left = -10;
+dir.shadow.camera.right = 10;</code></pre>
+          <p class="card-note">シャドウはパフォーマンスコストが高い。<code>mapSize</code> を上げると品質が上がるが重くなる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three.js Animation -->
+    <section class="topic-section reveal" id="threejs-animation">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#9654;</div>
+        <div>
+          <h3 class="topic-title">Animation Loop</h3>
+          <p class="topic-desc">毎フレームの更新処理とタイムベースアニメーション</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">アニメーションループ</div>
+          <pre><code class="language-javascript">const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  const elapsed = clock.getElapsedTime();
+  const delta   = clock.getDelta(); // 前フレームからの時間
+
+  // タイムベースで動かす（fps非依存）
+  mesh.rotation.x = elapsed * 0.5;
+  mesh.rotation.y = elapsed * 0.8;
+
+  // フレームレートに依存しない移動
+  mesh.position.x += direction * speed * delta;
+
+  renderer.render(scene, camera);
+}
+
+animate();</code></pre>
+          <p class="card-note"><code>delta</code> を使うことでフレームレートが変化しても同じ速度で動く。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">OrbitControls</div>
+          <pre><code class="language-javascript">import { OrbitControls } from
+  'three/addons/controls/OrbitControls.js';
+
+const controls = new OrbitControls(camera, renderer.domElement);
+
+// 慣性（ダンピング）
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+// 制限
+controls.minDistance = 2;
+controls.maxDistance = 20;
+controls.maxPolarAngle = Math.PI / 2;
+
+// ループ内で更新が必要
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update(); // dampingに必要
+  renderer.render(scene, camera);
+}</code></pre>
+          <p class="card-note"><code>enableDamping</code> を使う場合、必ず <code>controls.update()</code> をアニメーションループ内で呼ぶ。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: JS Modules ─────────────────────────── -->
+    <section class="topic-section reveal" id="js-modules">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">&#9671;</div>
+        <div>
+          <h3 class="topic-title">ES Modules</h3>
+          <p class="topic-desc">import / export による依存管理とコード分割</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">named export / import</div>
+          <pre><code class="language-javascript">// math.js — 名前付きエクスポート
+export const PI = 3.14159;
+export function add(a, b) { return a + b; }
+export function multiply(a, b) { return a * b; }
+
+// main.js — 名前付きインポート
+import { PI, add, multiply } from "./math.js";
+
+// エイリアス
+import { add as sum } from "./math.js";
+
+// 全部まとめて
+import * as Math from "./math.js";
+Math.add(1, 2); // 3</code></pre>
+          <p class="card-note">名前付きエクスポートは複数定義できる。ツリーシェイキングの対象になりバンドルサイズを最小化できる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">default export / import</div>
+          <pre><code class="language-javascript">// component.js — デフォルトエクスポート
+export default class Button {
+  constructor(label) {
+    this.label = label;
+  }
+  render() {
+    return `&lt;button&gt;${this.label}&lt;/button&gt;`;
+  }
+}
+
+// main.js — 任意の名前でインポート可
+import Button from "./component.js";
+import Btn   from "./component.js"; // 同じもの
+
+const btn = new Button("Click me");
+btn.render();</code></pre>
+          <p class="card-note">デフォルトエクスポートはファイルごとに1つまで。クラスや関数を1ファイル1責務で公開する場合に使う。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">動的 import()</div>
+          <pre><code class="language-javascript">// 必要なタイミングで遅延ロード
+async function loadChart() {
+  const { Chart } = await import("./chart.js");
+  return new Chart();
+}
+
+// 条件付きロード
+if (user.isAdmin) {
+  const { AdminPanel } = await import("./admin.js");
+  AdminPanel.init();
+}
+
+// ルートベースの遅延ロード（コード分割）
+button.addEventListener("click", async () => {
+  const mod = await import("./heavy-module.js");
+  mod.doWork();
+});</code></pre>
+          <p class="card-note">動的importは初期バンドルを軽くするためのコード分割に不可欠。Promiseを返す。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: JS Generators ───────────────────────── -->
+    <section class="topic-section reveal" id="js-generators">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">&#8734;</div>
+        <div>
+          <h3 class="topic-title">Generators / Iterators</h3>
+          <p class="topic-desc">遅延評価・無限シーケンス・カスタムイテレーター</p>
+        </div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Generator 基本</div>
+          <pre><code class="language-javascript">// function* でジェネレーター関数を定義
+function* counter(start = 0) {
+  let n = start;
+  while (true) {
+    yield n++;     // 値を返して一時停止
+  }
+}
+
+const gen = counter(1);
+gen.next(); // { value: 1, done: false }
+gen.next(); // { value: 2, done: false }
+gen.next(); // { value: 3, done: false }
+
+// for...of で反復（有限ジェネレーターのみ）
+function* range(start, end) {
+  for (let i = start; i &lt;= end; i++) yield i;
+}
+[...range(1, 5)]; // [1, 2, 3, 4, 5]</code></pre>
+          <p class="card-note"><code>yield</code> は関数の実行を一時停止し、呼び出し元に値を返す。<code>next()</code> で再開する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">非同期ジェネレーター</div>
+          <pre><code class="language-javascript">async function* streamData(url) {
+  const res = await fetch(url);
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    yield decoder.decode(value);
+  }
+}
+
+// for await...of で消費
+for await (const chunk of streamData("/api/stream")) {
+  console.log("Chunk:", chunk);
+  renderChunk(chunk);
+}</code></pre>
+          <p class="card-note">非同期ジェネレーターはストリーミングAPIやページネーションの処理に最適。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">カスタム Iterator</div>
+          <pre><code class="language-javascript">class Range {
+  constructor(start, end) {
+    this.start = start;
+    this.end   = end;
+  }
+
+  // Symbol.iteratorを実装するとfor...ofで使える
+  [Symbol.iterator]() {
+    let current = this.start;
+    const end   = this.end;
+    return {
+      next() {
+        return current &lt;= end
+          ? { value: current++, done: false }
+          : { value: undefined, done: true };
+      }
+    };
+  }
+}
+
+const range = new Range(1, 5);
+[...range];              // [1, 2, 3, 4, 5]
+for (const n of range) console.log(n);</code></pre>
+          <p class="card-note"><code>Symbol.iterator</code> を実装するとスプレッド・分割代入・<code>for...of</code> がすべて使えるようになる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: JS Design Patterns ─────────────────── -->
+    <section class="topic-section reveal" id="js-patterns">
+      <div class="topic-header">
+        <div class="topic-icon js-icon">&#9670;</div>
+        <div>
+          <h3 class="topic-title">デザインパターン</h3>
+          <p class="topic-desc">Observer・Factory・Singleton の実装</p>
+        </div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Observer パターン</div>
+          <pre><code class="language-javascript">class EventEmitter {
+  #listeners = new Map();
+
+  on(event, fn) {
+    if (!this.#listeners.has(event))
+      this.#listeners.set(event, new Set());
+    this.#listeners.get(event).add(fn);
+    return () => this.off(event, fn); // unsubscribe
+  }
+
+  off(event, fn) {
+    this.#listeners.get(event)?.delete(fn);
+  }
+
+  emit(event, ...args) {
+    this.#listeners.get(event)?.forEach(fn => fn(...args));
+  }
+}
+
+const bus = new EventEmitter();
+const unsub = bus.on("data", d => console.log(d));
+bus.emit("data", { id: 1 }); // { id: 1 }
+unsub(); // 解除</code></pre>
+          <p class="card-note">Observerはイベント駆動設計の基礎。ReactのuseEffectやRxJSのObservableも同じ思想。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Factory パターン</div>
+          <pre><code class="language-javascript">// 生成ロジックを一箇所に集約
+function createUser(type, data) {
+  const base = {
+    id: crypto.randomUUID(),
+    createdAt: new Date(),
+    ...data,
+  };
+
+  const roles = {
+    admin:  { ...base, permissions: ["read","write","delete"] },
+    editor: { ...base, permissions: ["read","write"] },
+    viewer: { ...base, permissions: ["read"] },
+  };
+
+  if (!(type in roles))
+    throw new Error(`Unknown type: ${type}`);
+
+  return roles[type];
+}
+
+const admin  = createUser("admin",  { name: "Alice" });
+const editor = createUser("editor", { name: "Bob" });</code></pre>
+          <p class="card-note">Factoryは生成の詳細を隠蔽し、呼び出し側は「何を作るか」だけを指定する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Singleton パターン</div>
+          <pre><code class="language-javascript">// ESModuleはファイル単位でシングルトン
+// ── store.js ──
+class AppStore {
+  #state = { theme: "dark", lang: "ja" };
+
+  get(key)       { return this.#state[key]; }
+  set(key, val)  { this.#state[key] = val; }
+  getAll()       { return { ...this.#state }; }
+}
+
+export const store = new AppStore(); // 1インスタンス
+
+// ── component-a.js ──
+import { store } from "./store.js";
+store.set("theme", "light");
+
+// ── component-b.js ──
+import { store } from "./store.js"; // 同じインスタンス
+store.get("theme"); // "light"</code></pre>
+          <p class="card-note">ESModulesの仕組みを利用すると自然にシングルトンを実現できる。明示的なインスタンス管理が不要。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 2 追加セクション -->
+    <!-- ── NEW: Storage API ────────────────────────── -->
+    <section class="topic-section reveal" id="html5-storage">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#128190;</div>
+        <div>
+          <h3 class="topic-title">Storage API</h3>
+          <p class="topic-desc">localStorage・sessionStorage・IndexedDB</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">localStorage / sessionStorage</div>
+          <pre><code class="language-javascript">// localStorage: タブ・ウィンドウを超えて永続
+localStorage.setItem("token", "abc123");
+localStorage.getItem("token");    // "abc123"
+localStorage.removeItem("token");
+localStorage.clear();
+
+// オブジェクトの保存（JSON変換必須）
+localStorage.setItem("user",
+  JSON.stringify({ name: "Alice", age: 30 }));
+const user = JSON.parse(localStorage.getItem("user"));
+
+// sessionStorage: タブを閉じると消える
+sessionStorage.setItem("draft", formData);
+
+// storageイベント（別タブの変更を検知）
+window.addEventListener("storage", (e) => {
+  console.log(e.key, e.newValue, e.oldValue);
+});</code></pre>
+          <p class="card-note">localStorageは同期APIで約5MBまで。機密情報（パスワード・トークン）は保存しないこと。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">IndexedDB</div>
+          <pre><code class="language-javascript">// 非同期・大容量・構造化データ用
+const request = indexedDB.open("MyDB", 1);
+
+request.onupgradeneeded = (e) => {
+  const db = e.target.result;
+  const store = db.createObjectStore("users", {
+    keyPath: "id", autoIncrement: true
+  });
+  store.createIndex("name", "name", { unique: false });
+};
+
+request.onsuccess = (e) => {
+  const db = e.target.result;
+  const tx = db.transaction("users", "readwrite");
+  const store = tx.objectStore("users");
+
+  store.add({ name: "Alice", age: 30 });
+  store.getAll().onsuccess = (e) => {
+    console.log(e.target.result);
+  };
+};</code></pre>
+          <p class="card-note">IndexedDBはGBレベルのデータ保存が可能。複雑なAPIをラップする <code>idb</code> ライブラリが実用的。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Cache API（Service Worker）</div>
+          <pre><code class="language-javascript">// service-worker.js
+const CACHE = "v1";
+const ASSETS = ["/", "/index.html", "/app.js"];
+
+// インストール時にキャッシュ
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches.open(CACHE).then(c => c.addAll(ASSETS))
+  );
+});
+
+// フェッチ時にキャッシュファースト
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    caches.match(e.request).then(
+      cached => cached || fetch(e.request)
+    )
+  );
+});</code></pre>
+          <p class="card-note">Cache APIはService Workerと組み合わせることでオフライン対応のPWAを実現する。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: WebSocket ──────────────────────────── -->
+    <section class="topic-section reveal" id="html5-websocket">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#8644;</div>
+        <div>
+          <h3 class="topic-title">WebSocket</h3>
+          <p class="topic-desc">双方向リアルタイム通信の確立と管理</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">接続・送受信</div>
+          <pre><code class="language-javascript">const ws = new WebSocket("wss://example.com/ws");
+
+// 接続確立
+ws.addEventListener("open", () => {
+  console.log("Connected!");
+  ws.send(JSON.stringify({ type: "hello" }));
+});
+
+// メッセージ受信
+ws.addEventListener("message", (e) => {
+  const data = JSON.parse(e.data);
+  console.log("Received:", data);
+});
+
+// エラー / 切断
+ws.addEventListener("error", (e) => console.error(e));
+ws.addEventListener("close", (e) => {
+  console.log("Closed:", e.code, e.reason);
+});
+
+// 切断
+ws.close(1000, "Normal closure");</code></pre>
+          <p class="card-note"><code>readyState</code>: 0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED。送信前に必ず確認する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">自動再接続の実装</div>
+          <pre><code class="language-javascript">class ReconnectingWS {
+  #url; #ws; #retries = 0;
+  #maxRetries = 5;
+  #handlers = {};
+
+  constructor(url) {
+    this.#url = url;
+    this.#connect();
+  }
+
+  #connect() {
+    this.#ws = new WebSocket(this.#url);
+    this.#ws.onopen    = () => { this.#retries = 0; this.#handlers.open?.(); };
+    this.#ws.onmessage = (e) => this.#handlers.message?.(e.data);
+    this.#ws.onclose   = () => this.#scheduleRetry();
+  }
+
+  #scheduleRetry() {
+    if (this.#retries &gt;= this.#maxRetries) return;
+    const delay = Math.min(1000 * 2 ** this.#retries, 30000);
+    setTimeout(() => this.#connect(), delay);
+    this.#retries++;
+  }
+
+  on(event, fn) { this.#handlers[event] = fn; return this; }
+  send(data) { this.#ws.send(JSON.stringify(data)); }
+}</code></pre>
+          <p class="card-note">指数バックオフで再接続することでサーバーへの過負荷を防ぐ。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: Observer APIs ──────────────────────── -->
+    <section class="topic-section reveal" id="html5-observers">
+      <div class="topic-header">
+        <div class="topic-icon html-icon">&#128065;</div>
+        <div>
+          <h3 class="topic-title">Observer APIs</h3>
+          <p class="topic-desc">IntersectionObserver / MutationObserver / ResizeObserver</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">IntersectionObserver</div>
+          <pre><code class="language-javascript">// 要素が画面に入ったかを監視（スクロールアニメーション）
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target); // 一度だけ
+      }
+    });
+  },
+  {
+    root: null,        // ビューポートを基準
+    rootMargin: "-50px",
+    threshold: 0.1,    // 10%見えたら発火
+  }
+);
+
+document.querySelectorAll(".reveal")
+  .forEach(el => observer.observe(el));</code></pre>
+          <p class="card-note">scrollイベントの代替。バックグラウンドスレッドで動作し、メインスレッドをブロックしない。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">MutationObserver</div>
+          <pre><code class="language-javascript">// DOM変更を監視
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach(mutation => {
+    if (mutation.type === "childList") {
+      console.log("子要素が変化:", mutation.addedNodes);
+    }
+    if (mutation.type === "attributes") {
+      console.log("属性変化:", mutation.attributeName);
+    }
+  });
+});
+
+observer.observe(document.getElementById("app"), {
+  childList: true,   // 子要素の追加・削除
+  subtree: true,     // 子孫も監視
+  attributes: true,  // 属性変更
+  characterData: true // テキスト変更
+});
+
+observer.disconnect(); // 監視停止</code></pre>
+          <p class="card-note">サードパーティのDOM変更（広告・ウィジェット）や、仮想DOMが直接操作できない要素の監視に使う。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">ResizeObserver</div>
+          <pre><code class="language-javascript">// 要素のサイズ変化を監視
+const observer = new ResizeObserver((entries) => {
+  for (const entry of entries) {
+    const { width, height } = entry.contentRect;
+    const { inlineSize, blockSize } =
+      entry.borderBoxSize[0];
+
+    console.log(`${width}x${height}`);
+
+    // サイズに応じてレイアウト切り替え
+    entry.target.classList.toggle(
+      "compact", width &lt; 400
+    );
+  }
+});
+
+observer.observe(document.querySelector(".card"));
+
+// 複数要素を監視
+document.querySelectorAll(".panel")
+  .forEach(el => observer.observe(el));</code></pre>
+          <p class="card-note">window resizeとは異なり、個別要素のサイズ変化を検知。コンポーネントベースのレスポンシブ設計に有用。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 3 追加セクション -->
+    <!-- ── NEW: Three.js Textures ──────────────────── -->
+    <section class="topic-section reveal" id="threejs-texture">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#128444;</div>
+        <div>
+          <h3 class="topic-title">Textures / UV Mapping</h3>
+          <p class="topic-desc">画像・手続き型テクスチャでサーフェスに質感を与える</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">TextureLoader</div>
+          <pre><code class="language-javascript">const loader = new THREE.TextureLoader();
+
+// 基本ロード
+const colorMap = loader.load("/textures/color.jpg");
+
+// コールバック付き
+const normalMap = loader.load(
+  "/textures/normal.jpg",
+  (tex) => console.log("Loaded!"),
+  undefined,
+  (err) => console.error(err)
+);
+
+// PBRマテリアルに適用
+const mat = new THREE.MeshStandardMaterial({
+  map:         colorMap,   // アルベド
+  normalMap:   normalMap,  // 法線マップ
+  roughnessMap: loader.load("/textures/roughness.jpg"),
+  aoMap:        loader.load("/textures/ao.jpg"),
+});</code></pre>
+          <p class="card-note">normalMapは法線情報を格納した画像。ポリゴン数を増やさずに凹凸の質感を表現できる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">UV / repeat / offset</div>
+          <pre><code class="language-javascript">const texture = loader.load("/tile.jpg");
+
+// テクスチャのラップ設定
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+
+// タイリング（UV座標の繰り返し回数）
+texture.repeat.set(4, 4);
+
+// オフセット（スクロールアニメーションに使える）
+texture.offset.set(0, 0);
+
+// アニメーションループ内で動かす
+function tick() {
+  requestAnimationFrame(tick);
+  texture.offset.x += 0.001; // スクロール効果
+  renderer.render(scene, camera);
+}
+
+// ミップマップフィルタリング
+texture.minFilter = THREE.LinearMipmapLinearFilter;
+texture.magFilter = THREE.LinearFilter;</code></pre>
+          <p class="card-note">UV座標はジオメトリ表面と2Dテクスチャを対応付ける0〜1の座標系。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">CanvasTexture（手続き型）</div>
+          <pre><code class="language-javascript">// Canvasで手続き的にテクスチャを生成
+const canvas = document.createElement("canvas");
+canvas.width = canvas.height = 512;
+const ctx = canvas.getContext("2d");
+
+// グラデーション背景
+const grad = ctx.createLinearGradient(0, 0, 512, 512);
+grad.addColorStop(0, "#6366f1");
+grad.addColorStop(1, "#ec4899");
+ctx.fillStyle = grad;
+ctx.fillRect(0, 0, 512, 512);
+
+// テキスト
+ctx.font = "bold 64px Inter";
+ctx.fillStyle = "white";
+ctx.fillText("Three.js", 80, 280);
+
+// Three.jsテクスチャに変換
+const texture = new THREE.CanvasTexture(canvas);
+
+// 動的更新（Canvas変更後に呼ぶ）
+texture.needsUpdate = true;</code></pre>
+          <p class="card-note"><code>CanvasTexture</code> はCanvas 2D APIで生成した画像をテクスチャとして使える。動的な表示板や字幕に使う。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: Three.js Raycasting ────────────────── -->
+    <section class="topic-section reveal" id="threejs-raycasting">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#9654;</div>
+        <div>
+          <h3 class="topic-title">Raycasting</h3>
+          <p class="topic-desc">マウスクリック・ホバーで3Dオブジェクトを検出</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本的なRaycaster</div>
+          <pre><code class="language-javascript">const raycaster = new THREE.Raycaster();
+const mouse     = new THREE.Vector2();
+
+// マウス座標をNDC（-1〜1）に変換
+function onMouseMove(e) {
+  mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+}
+
+window.addEventListener("mousemove", onMouseMove);
+
+// アニメーションループ内でインタラクション処理
+function tick() {
+  requestAnimationFrame(tick);
+
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(scene.children);
+
+  if (hits.length > 0) {
+    const target = hits[0].object;
+    target.material.color.set(0xec4899); // ホバーカラー
+  }
+
+  renderer.render(scene, camera);
+}</code></pre>
+          <p class="card-note">Raycasterはカメラから画面上の点に向けてレイ（光線）を飛ばし、交差するオブジェクトを返す。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">クリックイベント</div>
+          <pre><code class="language-javascript">// クリック時にオブジェクトを選択
+const selected = new Set();
+
+window.addEventListener("click", (e) => {
+  mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(meshes);
+
+  if (hits.length > 0) {
+    const obj = hits[0].object;
+
+    if (selected.has(obj)) {
+      selected.delete(obj);
+      obj.material.emissive.set(0x000000);
+    } else {
+      selected.add(obj);
+      obj.material.emissive.set(0x6366f1);
+      obj.material.emissiveIntensity = 0.5;
+    }
+  }
+});
+
+// hits[0].point  — 3D交差点
+// hits[0].distance — カメラからの距離
+// hits[0].uv     — UV座標（テクスチャ位置）</code></pre>
+          <p class="card-note"><code>intersectObjects(arr, recursive)</code> の第2引数を <code>true</code> にすると子オブジェクトも対象になる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEW: Three.js ShaderMaterial ───────────── -->
+    <section class="topic-section reveal" id="threejs-shader">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#128165;</div>
+        <div>
+          <h3 class="topic-title">ShaderMaterial / GLSL</h3>
+          <p class="topic-desc">GPUプログラムを直接書いてカスタムエフェクトを作る</p>
+        </div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">ShaderMaterial 基本</div>
+          <pre><code class="language-javascript">const mat = new THREE.ShaderMaterial({
+  uniforms: {
+    uTime:  { value: 0 },
+    uColor: { value: new THREE.Color(0x6366f1) },
+  },
+
+  vertexShader: /* glsl */`
+    uniform float uTime;
+    varying vec2 vUv;
+    varying float vElevation;
+
+    void main() {
+      vUv = uv;
+      vec3 pos = position;
+      // 波打つ頂点
+      pos.z += sin(pos.x * 3.0 + uTime) * 0.2;
+      vElevation = pos.z;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    }
+  `,
+
+  fragmentShader: /* glsl */`
+    uniform vec3 uColor;
+    varying vec2 vUv;
+    varying float vElevation;
+
+    void main() {
+      float alpha = 0.6 + vElevation * 2.0;
+      gl_FragColor = vec4(uColor, alpha);
+    }
+  `,
+
+  transparent: true,
+});
+
+// ループ内でuniformを更新
+const clock = new THREE.Clock();
+function tick() {
+  mat.uniforms.uTime.value = clock.getElapsedTime();
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}</code></pre>
+          <p class="card-note"><code>uTime</code> を渡すことで時間依存のアニメーションをGPU側で行える。CPU負荷が極めて低い。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">GLSL 基本型・組み込み関数</div>
+          <pre><code class="language-javascript">/* GLSL データ型 */
+// float   — 浮動小数点
+// vec2    — 2Dベクトル (x, y)
+// vec3    — 3Dベクトル (x, y, z) / (r, g, b)
+// vec4    — 4Dベクトル (x, y, z, w) / (r, g, b, a)
+// mat4    — 4x4行列
+// sampler2D — テクスチャサンプラー
+
+/* よく使う組み込み関数 */
+// mix(a, b, t)      — 線形補間 (GLSL版lerp)
+// clamp(x, lo, hi)  — 範囲クランプ
+// smoothstep(e0,e1,x) — 滑らかな0→1
+// sin/cos(rad)      — 三角関数
+// length(v)         — ベクトルの長さ
+// normalize(v)      — 単位ベクトル化
+// dot(a, b)         — 内積
+// cross(a, b)       — 外積
+// texture(sampler, uv) — テクスチャサンプリング
+// fract(x)          — 小数部分（タイリングに使う）
+// mod(x, y)         — 剰余（GLSLのmod）</code></pre>
+          <p class="card-note">GLSLはC言語に近い構文。頂点シェーダーはジオメトリの変形、フラグメントシェーダーはピクセル色を決定する。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Three.js: GLTF Loader ─────────────────── -->
+    <section class="topic-section reveal" id="threejs-gltf">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">GLB</div>
+        <div><h3 class="topic-title">GLTF Loader</h3><p class="topic-desc">3Dモデル (.glb/.gltf) の読み込みとアニメーション</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本ロード</div>
+          <pre><code class="language-javascript">import { GLTFLoader } from
+  "three/addons/loaders/GLTFLoader.js";
+
+const loader = new GLTFLoader();
+
+loader.load(
+  "/models/character.glb",
+  (gltf) => {
+    const model = gltf.scene;
+    model.scale.set(0.01, 0.01, 0.01);
+    model.position.set(0, -1, 0);
+
+    // 全メッシュにシャドウを設定
+    model.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow    = true;
+        child.receiveShadow = true;
+      }
+    });
+    scene.add(model);
+  },
+  (progress) => {
+    const pct = (progress.loaded / progress.total) * 100;
+    console.log(`${pct.toFixed(0)}%`);
+  },
+  (error) => console.error(error)
+);</code></pre>
+          <p class="card-note">GLTFは<strong>WebのJPG</strong>と呼ばれる3D標準フォーマット。<code>.glb</code>はバイナリ版でテクスチャを含む1ファイルにまとめられる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">アニメーション制御</div>
+          <pre><code class="language-javascript">let mixer;
+const clock = new THREE.Clock();
+
+loader.load("/models/character.glb", (gltf) => {
+  scene.add(gltf.scene);
+
+  mixer = new THREE.AnimationMixer(gltf.scene);
+
+  // 利用可能なアニメーション
+  // gltf.animations → ["Idle", "Walk", "Run", "Jump"]
+
+  const idle = mixer.clipAction(gltf.animations[0]);
+  const walk = mixer.clipAction(gltf.animations[1]);
+
+  idle.play();
+
+  // スムーズ切り替え（0.5秒でブレンド）
+  idle.crossFadeTo(walk, 0.5, true);
+  walk.play();
+});
+
+// ループ内で必ずupdate
+function tick() {
+  const delta = clock.getDelta();
+  mixer?.update(delta);
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}</code></pre>
+          <p class="card-note"><code>AnimationMixer</code>はスケルタルアニメーション・モーフィングを管理する。<code>crossFadeTo</code>でスムーズに切り替えられる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">DRACOコンプレッション</div>
+          <pre><code class="language-javascript">import { DRACOLoader } from
+  "three/addons/loaders/DRACOLoader.js";
+
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath(
+  "https://www.gstatic.com/draco/versioned/decoders/1.5.6/"
+);
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
+gltfLoader.load("/models/compressed.glb", (gltf) => {
+  scene.add(gltf.scene);
+});
+
+// LoadingManager で複数ファイルの進捗管理
+const manager = new THREE.LoadingManager(
+  () => console.log("All loaded!"),
+  (url, loaded, total) =>
+    console.log(`${loaded}/${total}: ${url}`)
+);
+const loader2 = new GLTFLoader(manager);</code></pre>
+          <p class="card-note">DRACOでメッシュデータを最大90%削減できる。Blenderエクスポート時に「Draco mesh compression」を有効にする。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Three.js: Post-processing ─────────────── -->
+    <section class="topic-section reveal" id="threejs-postprocessing">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">FX</div>
+        <div><h3 class="topic-title">Post-processing</h3><p class="topic-desc">Bloom・EffectComposer・カスタムShaderPass</p></div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">EffectComposer + Bloom</div>
+          <pre><code class="language-javascript">import { EffectComposer } from
+  "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from
+  "three/addons/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from
+  "three/addons/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from
+  "three/addons/postprocessing/OutputPass.js";
+
+const composer = new EffectComposer(renderer);
+
+// 1. 通常のシーンをレンダリング
+composer.addPass(new RenderPass(scene, camera));
+
+// 2. Bloomエフェクト
+composer.addPass(new UnrealBloomPass(
+  new THREE.Vector2(innerWidth, innerHeight),
+  1.5,  // strength
+  0.4,  // radius
+  0.85  // threshold（発光しきい値）
+));
+
+// 3. 色空間変換（最後に必ず追加）
+composer.addPass(new OutputPass());
+
+function tick() {
+  requestAnimationFrame(tick);
+  composer.render(); // renderer.render() の代わり
+}</code></pre>
+          <p class="card-note"><code>EffectComposer</code>はパスをチェーンしてポストプロセス効果を積み重ねる。<code>OutputPass</code>でsRGB出力への変換を行う。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">カスタム ShaderPass</div>
+          <pre><code class="language-javascript">import { ShaderPass } from
+  "three/addons/postprocessing/ShaderPass.js";
+
+const vignettePass = new ShaderPass({
+  uniforms: {
+    tDiffuse:  { value: null },
+    uStrength: { value: 1.5 },
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix
+        * modelViewMatrix * vec4(position, 1.0);
+    }`,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float uStrength;
+    varying vec2 vUv;
+    void main() {
+      vec4 color = texture2D(tDiffuse, vUv);
+      vec2 p = vUv * 2.0 - 1.0;
+      float v = 1.0 - dot(p, p) * uStrength * 0.3;
+      gl_FragColor = vec4(color.rgb * v, color.a);
+    }`,
+});
+composer.addPass(vignettePass);</code></pre>
+          <p class="card-note">カスタム<code>ShaderPass</code>で前のパスの出力（<code>tDiffuse</code>）を受け取り独自エフェクトを適用できる。ビネット・色収差・グレイン等に使う。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Three.js: Instanced Mesh ───────────────── -->
+    <section class="topic-section reveal" id="threejs-instanced">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#x221E;</div>
+        <div><h3 class="topic-title">Instanced Mesh</h3><p class="topic-desc">数万個のオブジェクトを1ドローコールで高速描画</p></div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本セットアップ</div>
+          <pre><code class="language-javascript">const COUNT = 10_000;
+const geo   = new THREE.SphereGeometry(0.05, 8, 8);
+const mat   = new THREE.MeshStandardMaterial({ color: 0x6366f1 });
+
+const mesh = new THREE.InstancedMesh(geo, mat, COUNT);
+mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+scene.add(mesh);
+
+const dummy = new THREE.Object3D();
+const color = new THREE.Color();
+
+for (let i = 0; i &lt; COUNT; i++) {
+  dummy.position.set(
+    (Math.random() - 0.5) * 20,
+    (Math.random() - 0.5) * 20,
+    (Math.random() - 0.5) * 20
+  );
+  dummy.updateMatrix();
+  mesh.setMatrixAt(i, dummy.matrix);
+
+  // インスタンスごとに色を変える
+  mesh.setColorAt(i, color.setHSL(Math.random(), 0.8, 0.6));
+}
+mesh.instanceMatrix.needsUpdate = true;
+mesh.instanceColor.needsUpdate  = true;</code></pre>
+          <p class="card-note"><code>InstancedMesh</code>は通常Meshを10,000個追加するより100倍以上高速。ドローコール数が1になりGPU負荷が激減する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">動的更新 + Raycasting</div>
+          <pre><code class="language-javascript">const matrix = new THREE.Matrix4();
+
+function tick() {
+  requestAnimationFrame(tick);
+  const t = clock.getElapsedTime();
+
+  for (let i = 0; i &lt; COUNT; i++) {
+    const p = positions[i];
+    dummy.position.set(
+      p.x + Math.sin(t * p.speed + i) * 0.5,
+      p.y + Math.cos(t * p.speed + i) * 0.5,
+      p.z
+    );
+    dummy.updateMatrix();
+    mesh.setMatrixAt(i, dummy.matrix);
+  }
+  mesh.instanceMatrix.needsUpdate = true;
+
+  // どのインスタンスがヒットしたか
+  const hits = raycaster.intersectObject(mesh);
+  if (hits[0]) {
+    const id = hits[0].instanceId;
+    mesh.setColorAt(id, new THREE.Color(0xec4899));
+    mesh.instanceColor.needsUpdate = true;
+  }
+  renderer.render(scene, camera);
+}</code></pre>
+          <p class="card-note"><code>hits[0].instanceId</code>でどのインスタンスがヒットしたかを取得できる。大量のパーティクルや群衆シミュレーションに使う。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Three.js: Environment Map ─────────────── -->
+    <section class="topic-section reveal" id="threejs-envmap">
+      <div class="topic-header">
+        <div class="topic-icon three-icon">&#127759;</div>
+        <div><h3 class="topic-title">Environment Map</h3><p class="topic-desc">HDR照明・リフレクション・リアルなライティング</p></div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">RGBELoader + HDR</div>
+          <pre><code class="language-javascript">import { RGBELoader } from
+  "three/addons/loaders/RGBELoader.js";
+
+const loader = new RGBELoader();
+
+loader.load("/textures/studio.hdr", (texture) => {
+  texture.mapping = THREE.EquirectangularReflectionMapping;
+
+  // 全マテリアルの環境マップに設定
+  scene.environment = texture;
+
+  // 背景にも使う場合
+  scene.background = texture;
+
+  // 背景と照明を分離
+  scene.background  = new THREE.Color(0x080818);
+  scene.environment = texture; // 照明だけに使用
+});
+
+// envMapの強度調整
+material.envMapIntensity = 1.5;</code></pre>
+          <p class="card-note">HDR（High Dynamic Range）画像はリアルなライティングを実現する。Poly HavenでフリーのHDRを多数入手できる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">PMREMGenerator + CubeCamera</div>
+          <pre><code class="language-javascript">// PMREMGenerator — HDRをMipmap対応テクスチャに変換
+const pmrem = new THREE.PMREMGenerator(renderer);
+pmrem.compileEquirectangularShader();
+
+loader.load("/env.hdr", (hdrTex) => {
+  const envMap = pmrem.fromEquirectangular(hdrTex).texture;
+  scene.environment = envMap;
+  hdrTex.dispose();
+  pmrem.dispose();
+});
+
+// CubeCamera — リアルタイム反射
+const cubeRT = new THREE.WebGLCubeRenderTarget(256, {
+  type: THREE.HalfFloatType
+});
+const cubeCamera = new THREE.CubeCamera(0.1, 100, cubeRT);
+scene.add(cubeCamera);
+
+const mirrorMat = new THREE.MeshStandardMaterial({
+  envMap: cubeRT.texture, metalness: 1.0, roughness: 0.0
+});
+
+function tick() {
+  mirrorMesh.visible = false;
+  cubeCamera.update(renderer, scene);
+  mirrorMesh.visible = true;
+  renderer.render(scene, camera);
+}</code></pre>
+          <p class="card-note"><code>CubeCamera</code>はシーンを6方向から撮影してリアルタイム反射を実現する。負荷が高いため静的な環境にはPMREMを使う。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- Chapter 4: Modern CSS -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="chapter-header reveal" id="chapter-4">
+      <span class="chapter-num">Chapter 04</span>
+      <h2>Modern CSS</h2>
+      <p>レイアウト・カスタムプロパティ・アニメーションの現代的手法</p>
+    </div>
+
+    <!-- ── CSS Grid ────────────────────────────────── -->
+    <section class="topic-section reveal" id="css-grid">
+      <div class="topic-header">
+        <div class="topic-icon css-icon">&#9783;</div>
+        <div>
+          <h3 class="topic-title">CSS Grid</h3>
+          <p class="topic-desc">2次元レイアウトを宣言的に記述する</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本グリッド</div>
+          <pre><code class="language-javascript">/* CSS */
+.container {
+  display: grid;
+
+  /* 3列: 固定・柔軟・固定 */
+  grid-template-columns: 200px 1fr 200px;
+
+  /* auto-fill で自動折り返し */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+  /* 3行: 固定・伸縮・固定 */
+  grid-template-rows: 60px 1fr 40px;
+
+  gap: 20px;           /* 行列の隙間 */
+  column-gap: 20px;
+  row-gap: 12px;
+}
+
+/* 子要素の配置 */
+.item {
+  grid-column: 1 / 3;     /* 1列目から3列目まで */
+  grid-row: 2 / 4;        /* 2行目から4行目まで */
+  grid-column: span 2;    /* 2列分占有 */
+  grid-area: header;      /* 名前付き領域 */
+}</code></pre>
+          <p class="card-note"><code>fr</code>（フラクション）は残りの空きスペースを分割する単位。<code>1fr 2fr</code> は1:2の比率で分割する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">named areas / template</div>
+          <pre><code class="language-javascript">/* 名前付き領域でレイアウトを視覚的に定義 */
+.layout {
+  display: grid;
+  grid-template-areas:
+    "header  header  header"
+    "sidebar main    main  "
+    "footer  footer  footer";
+  grid-template-columns: 240px 1fr 1fr;
+  grid-template-rows: 64px 1fr 48px;
+  min-height: 100vh;
+}
+
+.header  { grid-area: header;  }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main;    }
+.footer  { grid-area: footer;  }
+
+/* ドット(.) は空白セル */
+grid-template-areas:
+  "logo nav   nav"
+  ".    hero  ."
+  "foot foot foot";</code></pre>
+          <p class="card-note"><code>grid-template-areas</code> はHTMLの構造を変えずにレイアウトを完全に変更できる。レスポンシブ設計に強力。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">整列・配置</div>
+          <pre><code class="language-javascript">/* コンテナ側の整列 */
+.container {
+  /* 行軸（水平）の子要素整列 */
+  justify-items: start | end | center | stretch;
+
+  /* 列軸（垂直）の子要素整列 */
+  align-items: start | end | center | stretch;
+
+  /* グリッドトラック全体の配置 */
+  justify-content: start | end | center | space-between;
+  align-content:   start | end | center | space-between;
+}
+
+/* 個別要素の整列（コンテナ設定を上書き） */
+.item {
+  justify-self: center;
+  align-self:   end;
+
+  /* 垂直・水平の中央揃え */
+  place-self: center;  /* align-self + justify-self の短縮 */
+}</code></pre>
+          <p class="card-note"><code>place-items: center</code> を使うと1行で完全な中央揃えができる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CSS Variables ──────────────────────────── -->
+    <section class="topic-section reveal" id="css-variables">
+      <div class="topic-header">
+        <div class="topic-icon css-icon">&#x2394;</div>
+        <div>
+          <h3 class="topic-title">CSS Custom Properties</h3>
+          <p class="topic-desc">変数・テーマシステム・動的スタイル</p>
+        </div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">変数の定義と使用</div>
+          <pre><code class="language-javascript">/* :root でグローバル変数 */
+:root {
+  --color-primary:   #6366f1;
+  --color-secondary: #ec4899;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --font-size-base: 16px;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+/* 使用 */
+.button {
+  background: var(--color-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* フォールバック値 */
+.element {
+  color: var(--color-brand, #6366f1);
+}</code></pre>
+          <p class="card-note">CSSカスタムプロパティはSassの変数と異なり、ランタイムで変更・継承・JavaScript連携ができる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">テーマシステム</div>
+          <pre><code class="language-javascript">/* ライト / ダークテーマ */
+:root {
+  --bg:   #ffffff;
+  --text: #0f172a;
+  --surface: #f1f5f9;
+}
+
+[data-theme="dark"] {
+  --bg:   #080818;
+  --text: #e2e8f0;
+  --surface: #161630;
+}
+
+/* メディアクエリ連動 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #080818;
+    --text: #e2e8f0;
+  }
+}
+
+/* JS からテーマ切り替え */
+document.documentElement.dataset.theme = "dark";
+
+/* JS から変数を読み書き */
+const style = getComputedStyle(document.documentElement);
+style.getPropertyValue("--color-primary");
+
+document.documentElement.style
+  .setProperty("--color-primary", "#7c3aed");</code></pre>
+          <p class="card-note">カスタムプロパティはCSSカスケードで継承される。コンポーネントごとにスコープを絞るとテーマ管理が明確になる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">calc() / @property</div>
+          <pre><code class="language-javascript">/* calc() で動的な計算 */
+.grid {
+  grid-template-columns:
+    repeat(auto-fill, minmax(calc(var(--min-col, 200px) + 40px), 1fr));
+}
+
+.element {
+  width: calc(100% - var(--sidebar-width, 260px));
+  padding: calc(var(--spacing) * 2);
+}
+
+/* @property でアニメーション可能な変数を定義（Houdini） */
+@property --gradient-angle {
+  syntax: "&lt;angle&gt;";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-border {
+  background: conic-gradient(
+    from var(--gradient-angle),
+    #6366f1, #ec4899, #6366f1
+  );
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  to { --gradient-angle: 360deg; }
+}</code></pre>
+          <p class="card-note"><code>@property</code>（CSS Houdini）を使うと数値型・カラー型の変数をアニメーションできる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CSS Animations ─────────────────────────── -->
+    <section class="topic-section reveal" id="css-animation">
+      <div class="topic-header">
+        <div class="topic-icon css-icon">&#9654;</div>
+        <div>
+          <h3 class="topic-title">CSS Animations &amp; Transitions</h3>
+          <p class="topic-desc">transform・keyframes・Web Animations API</p>
+        </div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Transitions</div>
+          <pre><code class="language-javascript">/* 状態変化をなめらかにする */
+.button {
+  background: #6366f1;
+  transform: translateY(0) scale(1);
+  box-shadow: none;
+
+  transition:
+    background    0.2s ease,
+    transform     0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow    0.3s ease;
+}
+
+.button:hover {
+  background: #7c3aed;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(99,102,241,0.4);
+}
+
+/* cubic-bezier カーブ */
+/* ease-out    — 速→遅（落下感）  */
+/* ease-in     — 遅→速（加速感）  */
+/* spring-like — cubic-bezier(0.34, 1.56, 0.64, 1) */</code></pre>
+          <p class="card-note"><code>transform</code> と <code>opacity</code> はGPUで処理されるため高パフォーマンス。<code>top/left/width</code> はレイアウト再計算が発生する。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">@keyframes アニメーション</div>
+          <pre><code class="language-javascript">/* キーフレーム定義 */
+@keyframes float {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* 適用 */
+.floating {
+  animation:
+    float    3s ease-in-out infinite,
+    shimmer  2s linear      infinite;
+}
+
+/* 個別制御 */
+.card {
+  animation-name:            slide-up;
+  animation-duration:        0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-delay:           0.1s;
+  animation-fill-mode:       both;   /* 開始前も適用 */
+  animation-iteration-count: 1;
+}</code></pre>
+          <p class="card-note"><code>animation-fill-mode: both</code> はdelayのある入場アニメーションでちらつき防止に必須。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Web Animations API</div>
+          <pre><code class="language-javascript">// CSS@keyframesをJSから制御
+const el = document.querySelector(".card");
+
+const anim = el.animate(
+  [
+    { transform: "translateY(30px)", opacity: 0 },
+    { transform: "translateY(0)",    opacity: 1 },
+  ],
+  {
+    duration:   600,
+    easing:     "cubic-bezier(0.16, 1, 0.3, 1)",
+    fill:       "forwards",
+    delay:      100,
+  }
+);
+
+// Promiseで完了を待てる
+await anim.finished;
+console.log("Animation done!");
+
+// 再生制御
+anim.pause();
+anim.play();
+anim.reverse();
+anim.cancel();
+
+// スクラブ（スクロール連動など）
+anim.currentTime = 300; // 300msの位置にシーク</code></pre>
+          <p class="card-note">Web Animations APIはCSSアニメーションよりJSからの制御が柔軟で、GSAP不要のケースで活躍する。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CSS: Flexbox ───────────────────────────── -->
+    <section class="topic-section reveal" id="css-flexbox">
+      <div class="topic-header">
+        <div class="topic-icon css-icon">&#x25A4;</div>
+        <div><h3 class="topic-title">CSS Flexbox</h3><p class="topic-desc">1次元レイアウトの決定版</p></div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">コンテナのプロパティ</div>
+          <pre><code class="language-javascript">/* フレックスコンテナ */
+.container {
+  display: flex;           /* インラインは inline-flex */
+
+  /* 主軸の方向 */
+  flex-direction: row;     /* row | row-reverse | column | column-reverse */
+
+  /* 折り返し */
+  flex-wrap: wrap;         /* nowrap | wrap | wrap-reverse */
+
+  /* 主軸の整列 */
+  justify-content: space-between;
+  /* flex-start | flex-end | center
+     space-between | space-around | space-evenly */
+
+  /* 交差軸の整列 */
+  align-items: center;
+  /* flex-start | flex-end | center | stretch | baseline */
+
+  /* 複数行の整列 */
+  align-content: flex-start;
+
+  gap: 16px;               /* row-gap + column-gap */
+  gap: 12px 20px;          /* 行 列 */
+}</code></pre>
+          <p class="card-note"><code>flex-direction: column</code>にすると主軸が縦になり、<code>justify-content</code>と<code>align-items</code>の役割が入れ替わる点に注意。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">アイテムのプロパティ</div>
+          <pre><code class="language-javascript">/* フレックスアイテム */
+.item {
+  /* flex-grow: 残りスペースを分け合う比率 */
+  flex-grow: 1;  /* 0=伸びない（デフォルト） */
+
+  /* flex-shrink: はみ出し時に縮む比率 */
+  flex-shrink: 0; /* 0=縮まない */
+
+  /* flex-basis: 主軸方向の初期サイズ */
+  flex-basis: 200px; /* auto | 0 | px | % */
+
+  /* 短縮形: grow shrink basis */
+  flex: 1 1 auto;
+  flex: 1;      /* 1 1 0 */
+  flex: auto;   /* 1 1 auto */
+  flex: none;   /* 0 0 auto (固定サイズ) */
+
+  /* 個別の整列（コンテナのalign-itemsを上書き） */
+  align-self: flex-end;
+
+  /* 表示順序（DOMを変えずに並び替え） */
+  order: -1; /* 小さいほど先 */
+}</code></pre>
+          <p class="card-note"><code>flex: 1</code>はよく使う「等分割」の短縮形。<code>flex-basis: 0</code>から均等に拡大するため、コンテンツ量に関係なく同じ幅になる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">よく使うパターン</div>
+          <pre><code class="language-javascript">/* 完全中央揃え */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* スティッキーフッター */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main   { flex: 1; }       /* フッターを押し下げる */
+
+/* カード等幅レイアウト */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.card { flex: 1 1 280px; } /* 280px以上を維持して折り返す */
+
+/* ナビゲーションバー */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-spacer { flex: 1; }   /* 左右に分割 */</code></pre>
+          <p class="card-note"><code>flex: 1 1 280px</code>パターンは「最低280px確保しつつ折り返す」レスポンシブカードに使える。Grid の<code>auto-fill + minmax</code>と同等の効果。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CSS: Container Queries ────────────────── -->
+    <section class="topic-section reveal" id="css-container">
+      <div class="topic-header">
+        <div class="topic-icon css-icon">&#x25A1;</div>
+        <div><h3 class="topic-title">Container Queries</h3><p class="topic-desc">ビューポートではなく親要素のサイズに応じてスタイルを変える</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">@container 基本</div>
+          <pre><code class="language-javascript">/* コンテナを定義 */
+.card-wrapper {
+  container-type: inline-size; /* 幅を監視 */
+  container-name: card;        /* 名前付き（任意） */
+}
+
+/* コンテナのサイズに応じてスタイルを変える */
+@container (min-width: 400px) {
+  .card { flex-direction: row; }
+  .card-img { width: 160px; }
+}
+
+@container card (min-width: 600px) {
+  .card { padding: 32px; }
+  .card-title { font-size: 24px; }
+}
+
+/* メディアクエリとの違い */
+/* @media → ビューポート幅を見る（グローバル）   */
+/* @container → 親要素の幅を見る（コンポーネント単位） */</code></pre>
+          <p class="card-note">Container Queriesで同じコンポーネントがサイドバーに置かれた場合と、メインカラムに置かれた場合で自動的にレイアウトを変えられる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">コンテナ単位 + style queries</div>
+          <pre><code class="language-javascript">/* コンテナ相対単位 */
+.card-wrapper {
+  container-type: inline-size;
+}
+.card-title {
+  font-size: 5cqi;  /* コンテナ幅の5% */
+  padding: 2cqi 4cqi;
+}
+/* cqi — コンテナのinline-size（幅）に対するパーセント */
+/* cqb — コンテナのblock-size（高さ）に対するパーセント */
+/* cqmin / cqmax — 小さい/大きい方 */
+
+/* Style Queries（カスタムプロパティで分岐） */
+.theme-wrapper {
+  container-type: style;
+  --variant: primary;
+}
+@container style(--variant: primary) {
+  .btn { background: #6366f1; }
+}
+@container style(--variant: danger) {
+  .btn { background: #ef4444; }
+}</code></pre>
+          <p class="card-note">コンテナ単位<code>cqi</code>を使うと文字サイズがコンテナ幅に比例してスケールするため、レスポンシブタイポグラフィが容易になる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CSS: Scroll Animations ─────────────────── -->
+    <section class="topic-section reveal" id="css-scroll">
+      <div class="topic-header">
+        <div class="topic-icon css-icon">&#x2193;</div>
+        <div><h3 class="topic-title">Scroll-driven Animations</h3><p class="topic-desc">スクロール位置に連動したアニメーション・Scroll Snap</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">animation-timeline: scroll()</div>
+          <pre><code class="language-javascript">/* スクロール位置に連動したアニメーション（JSなし！） */
+@keyframes progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.progress-bar {
+  transform-origin: left;
+  animation: progress linear;
+  animation-timeline: scroll();          /* ページスクロール */
+  animation-timeline: scroll(root block); /* ルート要素・縦軸 */
+}
+
+/* 要素が画面内に入ったらアニメーション */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+  animation: fade-in linear both;
+  animation-timeline: view();  /* ビューポート内の位置を追跡 */
+  animation-range: entry 0% entry 40%;
+  /* entry: 要素が入る, exit: 要素が出る */
+}</code></pre>
+          <p class="card-note">Scroll-driven Animations APIはChrome 115+対応。<code>animation-timeline: scroll()</code>でJavaScript不要のスクロール連動が実現できる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Scroll Snap</div>
+          <pre><code class="language-javascript">/* スナップコンテナ */
+.slider {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  /* mandatory: 必ず最寄りにスナップ */
+  /* proximity: 近いときだけスナップ  */
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain; /* 親へのスクロール伝播を防ぐ */
+}
+
+/* スナップアイテム */
+.slide {
+  flex-shrink: 0;
+  width: 100%;
+  scroll-snap-align: start; /* start | center | end */
+  scroll-snap-stop: always; /* 1枚ずつ確実に止まる */
+}
+
+/* 縦方向フルページスクロール */
+.page-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+.page-section {
+  height: 100vh;
+  scroll-snap-align: start;
+}</code></pre>
+          <p class="card-note">Scroll Snapは純粋CSSでカルーセルやフルページスクロールを実装できる。<code>scroll-snap-stop: always</code>で高速スクロール時も1枚ずつ止まる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- Chapter 5: TypeScript -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="chapter-header reveal" id="chapter-5">
+      <span class="chapter-num">Chapter 05</span>
+      <h2>TypeScript</h2>
+      <p>静的型付けでJavaScriptをスケールさせる</p>
+    </div>
+
+    <!-- ── TS: 型 / Interface ─────────────────────── -->
+    <section class="topic-section reveal" id="ts-basics">
+      <div class="topic-header">
+        <div class="topic-icon ts-icon">TS</div>
+        <div><h3 class="topic-title">型 / Interface / Type</h3><p class="topic-desc">基本型・Union・Intersection・interface vs type</p></div>
+        <span class="topic-level beginner">Beginner</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">基本型と Union / Intersection</div>
+          <pre><code class="language-javascript">// プリミティブ型
+let name:   string  = "Alice";
+let age:    number  = 30;
+let active: boolean = true;
+let data:   unknown = fetchData(); // any の安全版
+
+// Union 型（どれか一つ）
+type Status = "idle" | "loading" | "success" | "error";
+type ID     = string | number;
+
+// Intersection 型（全部合わせる）
+type Admin = User & { permissions: string[] };
+
+// タプル型
+type Point3D = [number, number, number];
+const p: Point3D = [1, 2, 3];
+
+// リテラル型
+type Direction = "up" | "down" | "left" | "right";
+type Port      = 80 | 443 | 8080;
+
+// never: 到達不可能な型
+function assertNever(x: never): never {
+  throw new Error(`Unexpected: ${x}`);
+}</code></pre>
+          <p class="card-note"><code>unknown</code>は<code>any</code>の代わりに使う。型チェック前に操作できないため安全。<code>never</code>は網羅チェック（exhaustive check）に使う。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">interface vs type</div>
+          <pre><code class="language-javascript">// interface — オブジェクト・クラスの型定義
+interface User {
+  id:    number;
+  name:  string;
+  email?: string;       // オプショナル
+  readonly createdAt: Date; // 読み取り専用
+}
+
+// interface は宣言マージ可能
+interface User {
+  role: string; // 既存のUserに追加される
+}
+
+// type — より汎用的
+type UserOrAdmin = User | Admin;     // Union に使える
+type UserKeys    = keyof User;       // "id"|"name"|"email"...
+type Callback    = (event: Event) => void; // 関数型
+
+// interface は extends、type は &
+interface Admin extends User {
+  permissions: string[];
+}
+type AdminAlt = User &amp; { permissions: string[] };
+
+// どちらを使うか
+// オブジェクト/クラス → interface（拡張性）
+// Union/関数/計算型  → type</code></pre>
+          <p class="card-note"><code>interface</code>はライブラリ公開APIに向く（宣言マージで拡張可能）。アプリ内部では<code>type</code>で統一するチームも多い。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Optional・Readonly・as const</div>
+          <pre><code class="language-javascript">interface Config {
+  host:     string;
+  port:     number;
+  debug?:   boolean;           // オプショナル
+  readonly apiKey: string;     // 変更不可
+}
+
+// as const — 値をリテラル型として固定
+const ROUTES = {
+  home:    "/",
+  about:   "/about",
+  contact: "/contact",
+} as const;
+// ROUTES.home の型は "/" (string でなく)
+
+type Route = (typeof ROUTES)[keyof typeof ROUTES];
+// "/" | "/about" | "/contact"
+
+// 関数のオーバーロード
+function format(value: string): string;
+function format(value: number): string;
+function format(value: string | number): string {
+  return String(value);
+}</code></pre>
+          <p class="card-note"><code>as const</code>はenumの代わりとして使える。ツリーシェイキングに対応しており、実行時に余分なコードが残らない。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TS: Generics ───────────────────────────── -->
+    <section class="topic-section reveal" id="ts-generics">
+      <div class="topic-header">
+        <div class="topic-icon ts-icon">&lt;T&gt;</div>
+        <div><h3 class="topic-title">Generics</h3><p class="topic-desc">型を引数として受け取り再利用可能な型を作る</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">ジェネリック関数</div>
+          <pre><code class="language-javascript">// 型パラメータ T を受け取る
+function identity&lt;T&gt;(value: T): T {
+  return value;
+}
+identity&lt;string&gt;("hello"); // string
+identity(42);               // 型推論 → number
+
+// 複数の型パラメータ
+function pair&lt;A, B&gt;(a: A, b: B): [A, B] {
+  return [a, b];
+}
+
+// 配列の最初の要素を返す
+function first&lt;T&gt;(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+// Promise ラッパー
+async function fetchJSON&lt;T&gt;(url: string): Promise&lt;T&gt; {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json() as Promise&lt;T&gt;;
+}
+
+const user = await fetchJSON&lt;User&gt;("/api/user/1");</code></pre>
+          <p class="card-note">型引数は関数呼び出し時に省略可能な場合が多い（型推論が効く）。明示的に書くのは推論できない場合か、可読性のため。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Constraints（制約）</div>
+          <pre><code class="language-javascript">// extends で型パラメータを制約する
+function getLength&lt;T extends { length: number }&gt;(x: T): number {
+  return x.length; // OK: lengthが保証される
+}
+getLength("hello"); // 5
+getLength([1,2,3]); // 3
+// getLength(42);   // Error: numberにlengthはない
+
+// keyof 制約
+function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] {
+  return obj[key];
+}
+const user = { name: "Alice", age: 30 };
+getProperty(user, "name"); // string
+// getProperty(user, "foo"); // Error
+
+// デフォルト型パラメータ（TS 2.3+）
+interface ApiResponse&lt;T = unknown&gt; {
+  data:    T;
+  status:  number;
+  message: string;
+}
+type UserResponse = ApiResponse&lt;User&gt;;
+type AnyResponse  = ApiResponse; // T = unknown</code></pre>
+          <p class="card-note"><code>K extends keyof T</code>パターンはオブジェクトのプロパティに型安全にアクセスするための重要なイディオム。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">ジェネリッククラス</div>
+          <pre><code class="language-javascript">class Stack&lt;T&gt; {
+  #items: T[] = [];
+
+  push(item: T): void    { this.#items.push(item); }
+  pop(): T | undefined   { return this.#items.pop(); }
+  peek(): T | undefined  { return this.#items.at(-1); }
+  get size(): number     { return this.#items.length; }
+  isEmpty(): boolean     { return this.#items.length === 0; }
+}
+
+const stack = new Stack&lt;number&gt;();
+stack.push(1);
+stack.push(2);
+stack.pop(); // 2
+
+// ジェネリックなリポジトリパターン
+interface Repository&lt;T, ID&gt; {
+  findById(id: ID): Promise&lt;T | null&gt;;
+  findAll(): Promise&lt;T[]&gt;;
+  save(entity: T): Promise&lt;T&gt;;
+  delete(id: ID): Promise&lt;void&gt;;
+}
+
+class UserRepository implements Repository&lt;User, number&gt; {
+  async findById(id: number) { /* ... */ return null; }
+  async findAll()            { return []; }
+  async save(user: User)     { return user; }
+  async delete(id: number)   { /* ... */ }
+}</code></pre>
+          <p class="card-note">ジェネリックなRepository/Serviceパターンで型安全なデータアクセス層を実装できる。テストでモックを差し込む際も型が保証される。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TS: Utility Types ──────────────────────── -->
+    <section class="topic-section reveal" id="ts-utility">
+      <div class="topic-header">
+        <div class="topic-icon ts-icon">&#9874;</div>
+        <div><h3 class="topic-title">Utility Types</h3><p class="topic-desc">既存の型を変換する組み込みユーティリティ</p></div>
+        <span class="topic-level intermediate">Intermediate</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">Partial / Required / Readonly / Record</div>
+          <pre><code class="language-javascript">interface User {
+  id: number; name: string; email: string; age?: number;
+}
+
+// Partial&lt;T&gt; — 全プロパティをoptionalに
+type UserUpdate = Partial&lt;User&gt;;
+// { id?: number; name?: string; ... }
+
+// Required&lt;T&gt; — 全プロパティを必須に
+type StrictUser = Required&lt;User&gt;;
+// { id: number; name: string; email: string; age: number }
+
+// Readonly&lt;T&gt; — 全プロパティを読み取り専用に
+type FrozenUser = Readonly&lt;User&gt;;
+// frozen.name = "x"; // Error!
+
+// Record&lt;K, V&gt; — キーと値の型を指定したオブジェクト型
+type RoleMap    = Record&lt;string, string[]&gt;;
+type StatusMap  = Record&lt;"idle"|"loading"|"done", number&gt;;
+const map: StatusMap = { idle: 0, loading: 1, done: 2 };</code></pre>
+          <p class="card-note"><code>Partial</code>はPATCHエンドポイントの型定義に、<code>Readonly</code>はReduxのstateに使うと変更を型レベルで防げる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Pick / Omit / Exclude / Extract</div>
+          <pre><code class="language-javascript">interface User {
+  id: number; name: string; email: string; password: string;
+}
+
+// Pick&lt;T, K&gt; — 特定プロパティだけ抽出
+type PublicUser = Pick&lt;User, "id" | "name" | "email"&gt;;
+
+// Omit&lt;T, K&gt; — 特定プロパティを除外
+type SafeUser = Omit&lt;User, "password"&gt;;
+
+type EventType = "click" | "focus" | "blur" | "change";
+
+// Exclude&lt;T, U&gt; — Union から除外
+type MouseEvents = Exclude&lt;EventType, "focus" | "blur"&gt;;
+// "click" | "change"
+
+// Extract&lt;T, U&gt; — Union から抽出
+type FocusEvents = Extract&lt;EventType, "focus" | "blur"&gt;;
+// "focus" | "blur"
+
+// NonNullable&lt;T&gt; — null/undefined を除外
+type DefiniteUser = NonNullable&lt;User | null | undefined&gt;;
+// User</code></pre>
+          <p class="card-note"><code>Omit&lt;User, "password"&gt;</code>でAPIレスポンスの型から機密情報を除いた型を作る使い方が典型的。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">ReturnType / Parameters / Awaited / infer</div>
+          <pre><code class="language-javascript">function createUser(name: string, age: number) {
+  return { id: Math.random(), name, age, createdAt: new Date() };
+}
+
+// ReturnType&lt;T&gt; — 関数の戻り値の型
+type CreatedUser = ReturnType&lt;typeof createUser&gt;;
+// { id: number; name: string; age: number; createdAt: Date }
+
+// Parameters&lt;T&gt; — 関数の引数の型（タプル）
+type CreateArgs = Parameters&lt;typeof createUser&gt;;
+// [name: string, age: number]
+
+// Awaited&lt;T&gt; — Promise を解決した型
+type Resolved = Awaited&lt;Promise&lt;User&gt;&gt;;  // User
+
+// infer — 型推論を使って型を取り出す
+type UnpackPromise&lt;T&gt; =
+  T extends Promise&lt;infer U&gt; ? U : T;
+
+type ArrayItem&lt;T&gt; =
+  T extends (infer U)[] ? U : never;
+type Str = ArrayItem&lt;string[]&gt;; // string</code></pre>
+          <p class="card-note"><code>ReturnType</code>は関数の戻り値を別の場所で型として使いたいときに便利。型と実装の同期が自動で保たれる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TS: 型ガード / 高度な型 ──────────────── -->
+    <section class="topic-section reveal" id="ts-advanced">
+      <div class="topic-header">
+        <div class="topic-icon ts-icon">&#9670;</div>
+        <div><h3 class="topic-title">型ガード / 高度な型</h3><p class="topic-desc">条件型・テンプレートリテラル型・Discriminated Union</p></div>
+        <span class="topic-level advanced">Advanced</span>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal-card">
+          <div class="card-label">型ガード</div>
+          <pre><code class="language-javascript">// typeof / instanceof
+function process(value: string | number) {
+  if (typeof value === "string") {
+    value.toUpperCase(); // string として扱える
+  } else {
+    value.toFixed(2);    // number として扱える
+  }
+}
+
+// カスタム型ガード（is キーワード）
+interface Cat { type: "cat"; meow(): void; }
+interface Dog { type: "dog"; bark(): void; }
+
+function isCat(animal: Cat | Dog): animal is Cat {
+  return animal.type === "cat";
+}
+
+function makeSound(animal: Cat | Dog) {
+  if (isCat(animal)) {
+    animal.meow(); // Cat として扱える
+  } else {
+    animal.bark(); // Dog として扱える
+  }
+}
+
+// in 演算子で型を絞り込む
+function move(animal: Cat | Dog) {
+  if ("meow" in animal) animal.meow();
+}</code></pre>
+          <p class="card-note">カスタム型ガード（<code>x is T</code>）を使うと、複雑な判定ロジックを型推論と統合できる。if文の内側で型が自動的に絞り込まれる。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Discriminated Union</div>
+          <pre><code class="language-javascript">// 共通のdiscriminant（判別子）を持つUnion
+type ApiState&lt;T&gt; =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error";   error: Error };
+
+function renderUser(state: ApiState&lt;User&gt;) {
+  switch (state.status) {
+    case "idle":    return &lt;Idle /&gt;;
+    case "loading": return &lt;Spinner /&gt;;
+    case "success": return &lt;UserCard user={state.data} /&gt;;
+    case "error":   return &lt;Error err={state.error} /&gt;;
+    default:
+      // 全caseを網羅しないとコンパイルエラー
+      return assertNever(state);
+  }
+}
+
+function assertNever(x: never): never {
+  throw new Error(`Unhandled: ${JSON.stringify(x)}`);
+}</code></pre>
+          <p class="card-note">Discriminated Unionはステートマシンパターンとの相性が抜群。新しいstatusを追加すると、全switch文でコンパイルエラーが出るため安全。</p>
+        </div>
+        <div class="card reveal-card">
+          <div class="card-label">Conditional / Template Literal 型</div>
+          <pre><code class="language-javascript">// Conditional Types
+type IsString&lt;T&gt; = T extends string ? "yes" : "no";
+type R1 = IsString&lt;string&gt;; // "yes"
+type R2 = IsString&lt;number&gt;; // "no"
+
+// Distributive（Unionに自動分配）
+type ToArray&lt;T&gt; = T extends unknown ? T[] : never;
+type R3 = ToArray&lt;string | number&gt;; // string[] | number[]
+
+// Template Literal Types
+type EventName = "click" | "focus" | "blur";
+type Handler   = `on${Capitalize&lt;EventName&gt;}`;
+// "onClick" | "onFocus" | "onBlur"
+
+type CSSProperty = "color" | "background" | "border";
+type CSSVar = `--${CSSProperty}-${string}`;
+// "--color-primary", "--background-dark" など
+
+// Mapped Types と組み合わせ
+type Getters&lt;T&gt; = {
+  [K in keyof T as `get${Capitalize&lt;string &amp; K&gt;}`]: () =&gt; T[K]
+};
+type UserGetters = Getters&lt;User&gt;;
+// { getId(): number; getName(): string; ... }</code></pre>
+          <p class="card-note">Template Literal Typesはイベント名生成・CSSクラス名・APIパスの型定義に強力。<code>Capitalize</code>等の組み込み変換型と組み合わせて使う。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>WebDev Reference &mdash; JavaScript / HTML5 / Three.js / Modern CSS / TypeScript</p>
+      <p class="footer-sub">Built with Three.js &amp; Vanilla JS &nbsp;|&nbsp; 5 Chapters &nbsp;|&nbsp; 42 Topics</p>
+    </footer>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
