@@ -393,6 +393,27 @@ body {
 .intermediate { background: rgba(251,191,36,0.12); color: var(--yellow); border: 1px solid rgba(251,191,36,0.25); }
 .advanced     { background: rgba(236,72,153,0.12); color: var(--pink);  border: 1px solid rgba(236,72,153,0.25); }
 
+/* ===== Topic Overview ===== */
+.topic-overview {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  padding: 14px 18px;
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid var(--border2);
+}
+
+.topic-overview code {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--indigo2);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
 /* ===== Cards Grid ===== */
 .cards-grid {
   display: grid;

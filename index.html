@@ -122,6 +122,7 @@
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">JavaScriptの基礎となる変数・関数・配列操作を押さえよう。<code>let</code>/<code>const</code>による変数宣言、アロー関数の<code>this</code>バインディング、<code>map/filter/reduce</code>の関数型メソッドは日常的に使う構文の核心。型の暗黙的変換（coercion）が起きやすいため、等値比較は常に<code>===</code>を使う。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">変数宣言</div>
@@ -200,6 +201,7 @@ const obj2 = { ...obj1, newProp: "val" };</code></pre>
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">JavaScriptはシングルスレッドで動作し、非同期処理はイベントループで管理される。<code>Promise</code>チェーンより<code>async/await</code>の方が可読性が高く、<code>try/catch</code>でエラーも扱いやすい。並列実行には<code>Promise.all</code>、失敗を許容する場合は<code>Promise.allSettled</code>を使い分けよう。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Promise</div>
@@ -271,6 +273,7 @@ console.log("4");          // 同期
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">スコープは変数が参照できる範囲のこと。<code>let</code>/<code>const</code>はブロックスコープ、<code>var</code>は関数スコープで動作する。クロージャは関数が生成された時点のスコープを「記憶」する仕組みで、プライベートな状態の管理やカウンターの実装に活用できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">クロージャ</div>
@@ -322,6 +325,7 @@ Store.get("theme"); // "dark"</code></pre>
         </div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">JavaScriptのオブジェクトはプロトタイプチェーンで連結されており、<code>class</code>構文はその糖衣構文にすぎない。<code>#</code>プレフィックスでネイティブなプライベートフィールドを定義できる（ES2022）。継承より合成（Composition）を優先するのが現代的な設計アプローチ。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">class 構文</div>
@@ -377,6 +381,7 @@ car instanceof Vehicle; // true</code></pre>
         <div><h3 class="topic-title">Proxy / Reflect</h3><p class="topic-desc">オブジェクト操作をインターセプトしてカスタム動作を注入</p></div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">ProxyはES2015から導入されたメタプログラミング機構で、オブジェクトへの操作（get/set/deleteなど）をフックしてカスタム動作を挿入できる。Vue 3のリアクティブシステムの核心技術。<code>Reflect</code>はProxyトラップと1対1対応するAPIで、デフォルト動作を正確に委譲しつつ副作用を加えられる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本トラップ</div>
@@ -457,6 +462,7 @@ Reflect.defineProperty(obj, "id", {
         <div><h3 class="topic-title">Error Handling</h3><p class="topic-desc">カスタムエラー・エラーチェーン・Result型パターン</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">適切なエラー処理はコードの信頼性を決定づける。<code>Error</code>クラスを継承したカスタムエラーを定義し、<code>instanceof</code>で種別を分岐できるようにするのが基本。ES2022の<code>cause</code>オプションでエラーチェーンを形成し、Result型パターンで例外を使わない安全なエラー処理を実現できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">カスタムエラークラス</div>
@@ -552,6 +558,7 @@ console.log(result.value); // 型安全にアクセス</code></pre>
         <div><h3 class="topic-title">Regular Expressions</h3><p class="topic-desc">パターンマッチング・名前付きグループ・フラグ</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">正規表現はテキストのパターンマッチング・検索・置換に使う強力なツール。リテラル記法<code>/pattern/flags</code>と動的な<code>RegExp</code>コンストラクタの2通りがある。名前付きキャプチャグループ<code>(?&lt;name&gt;...)</code>や先読み・後読みを使うと複雑なパターンも読みやすく書ける。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本構文とフラグ</div>
@@ -634,6 +641,7 @@ slug("Hello, World!"); // "hello-world"</code></pre>
         <div><h3 class="topic-title">Fetch API / AbortController</h3><p class="topic-desc">HTTP通信・エラー処理・キャンセル・ストリーミング</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview"><code>fetch</code>はブラウザ標準のHTTPクライアントAPI。ネットワーク障害のみrejectするため、HTTP 4xx/5xxでもresolveする点に注意し<code>res.ok</code>チェックを必ず行う。<code>AbortController</code>でリクエストキャンセル・タイムアウトを実装でき、<code>ReadableStream</code>と非同期ジェネレーターを組み合わせてストリーミング処理もできる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本 fetch + エラー処理</div>
@@ -742,6 +750,7 @@ res.formData();    // FormData</code></pre>
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">HTML Canvasはピクセルレベルで2Dグラフィックスを描画できる環境。グラフ・ゲーム・画像処理・インタラクティブなビジュアライゼーションなど幅広い用途に使われる。<code>requestAnimationFrame</code>でモニターのリフレッシュレートに同期した滑らかなアニメーションを実現できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本描画</div>
@@ -762,6 +771,7 @@ ctx.fill();
 ctx.font = "bold 20px Inter";
 ctx.fillStyle = "#fff";
 ctx.fillText("Canvas!", 300, 50);</code></pre>
+          <p class="card-note"><code>getContext("2d")</code>で2D描画コンテキストを取得。描画は上から順番に重なるため、背景を先に描いてから前景を描く。<code>save()</code>/<code>restore()</code>で変換状態を保存・復元できる。</p>
         </div>
         <div class="card reveal-card">
           <div class="card-label">アニメーション</div>
@@ -802,6 +812,7 @@ animate();</code></pre>
         </div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">WebGLはOpenGL ES 2.0ベースの低レベルGPU APIで、ブラウザで3Dグラフィックスを高速に描画できる。頂点シェーダー（形状変換）とフラグメントシェーダー（色決定）をGLSLというC言語に近い言語で記述する。直接扱うのは複雑なため、通常はThree.jsなどの抽象化ライブラリを使う。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">WebGLパイプライン</div>
@@ -846,6 +857,7 @@ const vao = gl.createVertexArray();
 gl.bindVertexArray(vao);
 gl.enableVertexAttribArray(0);
 gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);</code></pre>
+          <p class="card-note">VBO（Vertex Buffer Object）はGPUメモリ上の頂点データ。VAO（Vertex Array Object）はVBOの属性レイアウト設定を記録し、描画前に<code>bindVertexArray</code>するだけで設定を再現できる。</p>
         </div>
       </div>
     </section>
@@ -860,6 +872,7 @@ gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);</code></pre>
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">Web Workerはメインスレッドと独立して動作するバックグラウンドスレッド。画像処理・暗号化・大量データの計算など重い処理をWorkerに移すことでUIのフリーズを防げる。DOMへのアクセスは不可で、<code>postMessage</code>/<code>onmessage</code>でデータをやり取りする。<code>Transferable</code>オブジェクトを使うとコピーなしで高速に転送できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Worker の作成</div>
@@ -895,6 +908,7 @@ worker.onmessage = (e) => {
         <div><h3 class="topic-title">Web Audio API</h3><p class="topic-desc">ブラウザで音声を生成・処理・可視化する</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">Web Audio APIはブラウザで音声を生成・処理・可視化するための強力なAPI。オシレーター・フィルター・エフェクトなどの処理ノードをグラフ状に接続して音声パイプラインを構築する。<code>AudioContext</code>はユーザーのインタラクション後に作成する必要があるなど、ブラウザのAutoplay制限に注意が必要。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">AudioContext / OscillatorNode</div>
@@ -979,6 +993,7 @@ const micSource = ctx.createMediaStreamSource(stream);</code></pre>
         <div><h3 class="topic-title">File API / Drag &amp; Drop</h3><p class="topic-desc">ファイルの読み込み・ドラッグ操作・バリデーション</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">File APIでinput要素やドラッグ＆ドロップからファイルを受け取り、<code>file.text()</code>/<code>file.arrayBuffer()</code>（Promise版）や<code>FileReader</code>で内容を読み込める。MIMEタイプとファイルサイズのバリデーションはUI側だけでなく、サーバーサイドでも必ず行うこと。<code>createObjectURL</code>で一時URLを生成したら必ず<code>revokeObjectURL</code>で解放する。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">File input + FileReader</div>
@@ -1075,6 +1090,7 @@ async function checkImageDimensions(file) {
         <div><h3 class="topic-title">Clipboard API</h3><p class="topic-desc">テキスト・画像のコピー&amp;ペースト操作</p></div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">Clipboard APIでテキスト・画像をプログラムからコピー&amp;ペーストできる。非同期APIの<code>navigator.clipboard</code>はHTTPS環境とページのフォーカスが必要。<code>copy</code>/<code>paste</code>イベントを使えばユーザーのコピー内容を加工したり、スクリーンショットの貼り付けを直接受け取ることもできる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">非同期 Clipboard API</div>
@@ -1147,6 +1163,7 @@ document.addEventListener("paste", (e) => {
         <div><h3 class="topic-title">Geolocation / History API</h3><p class="topic-desc">位置情報の取得とSPAルーティングの実装</p></div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">Geolocation APIでGPS/WiFiによる現在地を取得できる（ユーザーの明示的な許可が必要）。History APIはURLをページ遷移なしに変更できるSPAルーティングの基盤で、React RouterやVue RouterはこのAPIの上に構築されている。<code>pushState</code>で履歴スタックに積み、<code>popstate</code>イベントで戻る/進むを処理する。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Geolocation API</div>
@@ -1223,6 +1240,7 @@ history.state; // 最後にpush/replaceしたオブジェクト</code></pre>
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">Three.jsの全ての3Dシーンは「Scene（空間）・Camera（視点）・Renderer（描画）」の3要素で構成される。SceneにMeshや光源を追加し、Cameraで切り取った映像をRendererがCanvasに描画する。アニメーションループ内で<code>renderer.render(scene, camera)</code>を毎フレーム呼ぶのが基本パターン。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">セットアップ</div>
@@ -1277,6 +1295,7 @@ window.addEventListener("resize", onResize);</code></pre>
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">Three.jsの3Dオブジェクトは「ジオメトリ（形状データ）」と「マテリアル（材質・見た目）」を組み合わせた「メッシュ」で表現される。Box・Sphere・Torus等の組み込みジオメトリのほか、<code>BufferGeometry</code>で頂点座標を直接指定したカスタム形状も作れる。<code>MeshStandardMaterial</code>はPBR（物理ベースレンダリング）でリアルな質感を表現できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本ジオメトリ</div>
@@ -1294,6 +1313,7 @@ const geo = new THREE.BufferGeometry();
 const vertices = new Float32Array([...]);
 geo.setAttribute("position",
   new THREE.BufferAttribute(vertices, 3));</code></pre>
+          <p class="card-note">分割数を上げるほど滑らかになるがポリゴン数が増える。<code>SphereGeometry(0.5, 32, 32)</code>の32は横・縦の分割数。用途に応じてパフォーマンスとのバランスを取る。</p>
         </div>
         <div class="card reveal-card">
           <div class="card-label">マテリアル</div>
@@ -1335,6 +1355,7 @@ scene.add(mesh);</code></pre>
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">ライティングはシーンのリアリティを大きく左右する。<code>AmbientLight</code>で全体の明るさを底上げし、<code>DirectionalLight</code>で太陽光、<code>PointLight</code>で電球の光をシミュレートする。シャドウはリアリティを高めるが計算コストが高いため、<code>shadowMap.type</code>と<code>mapSize</code>の設定でパフォーマンスとのバランスを取ること。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">ライトの種類</div>
@@ -1356,6 +1377,7 @@ spot.angle = Math.PI / 6;
 spot.penumbra = 0.2;
 
 scene.add(ambient, point, dir, spot);</code></pre>
+          <p class="card-note"><code>AmbientLight</code>はシャドウを生成しない。リアルな屋外シーンには<code>DirectionalLight</code>（太陽光）＋<code>AmbientLight</code>（空の散乱光）の組み合わせが定番。</p>
         </div>
         <div class="card reveal-card">
           <div class="card-label">シャドウの設定</div>
@@ -1390,6 +1412,7 @@ dir.shadow.camera.right = 10;</code></pre>
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview"><code>requestAnimationFrame</code>でアニメーションループを作り、毎フレーム<code>renderer.render()</code>を呼ぶのがThree.jsアニメーションの基本。<code>THREE.Clock</code>の<code>getDelta()</code>で前フレームからの経過時間（デルタタイム）を取得し、動きの速度にかけることでフレームレートが変動しても同じ速度で動くアニメーションを実現できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">アニメーションループ</div>
@@ -1451,6 +1474,7 @@ function animate() {
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">モジュールシステムによってグローバル汚染を防ぎ、依存関係を明確にできる。<code>export</code>/<code>import</code>は静的解析できるためバンドラーのツリーシェイキングが効き、未使用コードを除去できる。動的<code>import()</code>を使えば必要なタイミングでのみモジュールを読み込むコード分割が可能。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">named export / import</div>
@@ -1524,6 +1548,7 @@ button.addEventListener("click", async () => {
         </div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">ジェネレーター関数は<code>yield</code>で実行を一時停止し、呼び出し元と双方向に値をやり取りできる遅延評価の仕組み。無限シーケンスの表現やカスタムイテレーターの実装のほか、LLM APIのストリーミングレスポンス処理にも活躍する。<code>Symbol.iterator</code>を実装すると<code>for...of</code>やスプレッド構文が使えるようになる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Generator 基本</div>
@@ -1608,6 +1633,7 @@ for (const n of range) console.log(n);</code></pre>
         </div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">デザインパターンは繰り返し現れる設計上の問題を解決する定石集。ブラウザの<code>EventTarget</code>やReactの<code>useReducer</code>もObserverパターンの変形。Factoryは生成ロジックを一箇所に集め、ESModulesを活用するとシングルトンを自然に実現できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Observer パターン</div>
@@ -1699,6 +1725,7 @@ store.get("theme"); // "light"</code></pre>
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">ブラウザには用途に応じた複数の永続化ストレージが用意されている。<code>localStorage</code>は最大5MBの文字列データを永続保存、<code>sessionStorage</code>はタブを閉じると消える一時保存。大量・構造化データには<code>IndexedDB</code>を使い、オフラインキャッシュには<code>Cache API</code>をService Workerと組み合わせる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">localStorage / sessionStorage</div>
@@ -1783,6 +1810,7 @@ self.addEventListener("fetch", (e) => {
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">HTTPは基本的に一方向（クライアント→サーバー）の通信だが、WebSocketは一度接続を確立すれば双方向にリアルタイムでデータをやり取りできる。チャット・オンラインゲーム・株価ティッカー・共同編集ツールに使われる。ネットワーク切断時の自動再接続（指数バックオフ）は実用上の必須実装。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">接続・送受信</div>
@@ -1854,6 +1882,7 @@ ws.close(1000, "Normal closure");</code></pre>
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">ブラウザ標準のObserver API群はスクロール・DOM変更・サイズ変化を効率的に監視できる。古い<code>scroll</code>イベントや<code>setInterval</code>によるポーリングと異なり、バックグラウンドで非同期に処理されメインスレッドへの影響が少ない。<code>IntersectionObserver</code>・<code>MutationObserver</code>・<code>ResizeObserver</code>の3つを用途に応じて使い分けよう。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">IntersectionObserver</div>
@@ -1941,6 +1970,7 @@ document.querySelectorAll(".panel")
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">テクスチャはジオメトリの表面に画像を貼り付けてリアルな質感を与える仕組み。UV座標はジオメトリ表面と2D画像を対応付ける0〜1の座標系。カラーマップ・法線マップ・ラフネスマップを組み合わせることで、ポリゴン数を増やさずにPBRマテリアルに詳細な質感を表現できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">TextureLoader</div>
@@ -2031,6 +2061,7 @@ texture.needsUpdate = true;</code></pre>
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">Raycasterはカメラから画面上の点に向けてレイ（光線）を飛ばし、3D空間内のオブジェクトとの交差を検出する仕組み。マウス座標をNDC（-1〜1）に変換してから<code>setFromCamera</code>でレイを生成し、<code>intersectObjects</code>でヒットしたオブジェクトのリストを取得する。3Dシーンへのインタラクション実装の基本技術。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本的なRaycaster</div>
@@ -2105,6 +2136,7 @@ window.addEventListener("click", (e) => {
         </div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview"><code>ShaderMaterial</code>を使うとGLSLプログラムを直接記述してGPU側でカスタムエフェクトを作れる。頂点シェーダーはジオメトリの変形（波・膨張・ノイズ）、フラグメントシェーダーはピクセルの色を決定する。<code>uniform</code>変数でJavaScriptからGPUにデータを渡し、時間・マウス位置・テクスチャなどを動的に更新できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">ShaderMaterial 基本</div>
@@ -2186,6 +2218,7 @@ function tick() {
         <div><h3 class="topic-title">GLTF Loader</h3><p class="topic-desc">3Dモデル (.glb/.gltf) の読み込みとアニメーション</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">GLTFはWebで事実上の標準3Dフォーマット。テクスチャ・アニメーション・マテリアルを1ファイル（<code>.glb</code>）にまとめられる。<code>AnimationMixer</code>でスケルタルアニメーションを制御し、<code>crossFadeTo</code>でスムーズに切り替えられる。DRACOコンプレッションでメッシュデータを最大90%削減できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本ロード</div>
@@ -2286,6 +2319,7 @@ const loader2 = new GLTFLoader(manager);</code></pre>
         <div><h3 class="topic-title">Post-processing</h3><p class="topic-desc">Bloom・EffectComposer・カスタムShaderPass</p></div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview"><code>EffectComposer</code>を使うと通常のレンダリングの後にシェーダーパスを連結して画面全体にエフェクトを適用できる。BloomでNeon発光表現、カスタム<code>ShaderPass</code>でビネット・色収差・フィルムグレインなど独自エフェクトを実装できる。パスチェーンの最後に<code>OutputPass</code>を追加してsRGB色空間への正確な変換を行うこと。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">EffectComposer + Bloom</div>
@@ -2361,6 +2395,7 @@ composer.addPass(vignettePass);</code></pre>
         <div><h3 class="topic-title">Instanced Mesh</h3><p class="topic-desc">数万個のオブジェクトを1ドローコールで高速描画</p></div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">同じジオメトリ・マテリアルを大量に描画するときは<code>InstancedMesh</code>を使う。通常の<code>Mesh</code>を10,000個追加するとドローコールが10,000回発生するが、<code>InstancedMesh</code>なら1回で済む。各インスタンスは独自の変換行列（位置・回転・スケール）と色を持てるため、パーティクル・群衆・星野などの表現に最適。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本セットアップ</div>
@@ -2432,6 +2467,7 @@ function tick() {
         <div><h3 class="topic-title">Environment Map</h3><p class="topic-desc">HDR照明・リフレクション・リアルなライティング</p></div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">HDR環境マップをシーンに設定するだけで全マテリアルにリアルな照明・反射が自動適用される。<code>RGBELoader</code>で<code>.hdr</code>ファイルを読み込み、<code>PMREMGenerator</code>で最適化テクスチャに変換するのが標準フロー。動的な反射が必要な場合は<code>CubeCamera</code>でシーンを6方向から毎フレーム撮影する。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">RGBELoader + HDR</div>
@@ -2512,6 +2548,7 @@ function tick() {
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">CSS Gridは2次元（行と列）のレイアウトを宣言的に記述できる。Flexboxが1次元なのに対し、Gridは行列を同時に制御できるため複雑なレイアウトに向く。<code>grid-template-areas</code>で視覚的にレイアウトを定義でき、<code>auto-fill + minmax</code>で自動折り返しのレスポンシブグリッドを1行で作れる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本グリッド</div>
@@ -2606,6 +2643,7 @@ grid-template-areas:
         </div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">CSSカスタムプロパティ（変数）は<code>:root</code>にグローバル定義してサイト全体で共有できる。SassやLessの変数と異なりランタイムで変更できるため、JavaScriptと連携したテーマ切り替えやダークモードの実装に最適。<code>@property</code>（CSS Houdini）を使えばアニメーション可能な型付き変数を定義できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">変数の定義と使用</div>
@@ -2715,6 +2753,7 @@ document.documentElement.style
         </div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview"><code>transition</code>は2状態間の補間、<code>@keyframes</code>は任意のタイムラインでのアニメーションを定義する。GPUで処理される<code>transform</code>と<code>opacity</code>を使うとレイアウトの再計算が発生せず高パフォーマンスを維持できる。Web Animations APIを使えばJSからアニメーションを動的に制御でき、<code>await anim.finished</code>で完了を待てる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Transitions</div>
@@ -2816,6 +2855,7 @@ anim.currentTime = 300; // 300msの位置にシーク</code></pre>
         <div><h3 class="topic-title">CSS Flexbox</h3><p class="topic-desc">1次元レイアウトの決定版</p></div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">Flexboxは主軸に沿って子要素を柔軟に並べる1次元レイアウト。ナビゲーションバー・カードリスト・垂直中央揃えなど日常的なレイアウトのほとんどはFlexboxで解決できる。<code>flex: 1</code>で均等分割、<code>gap</code>でアイテム間の隙間、<code>flex-direction: column</code>で縦並びと直感的に使える。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">コンテナのプロパティ</div>
@@ -2917,6 +2957,7 @@ anim.currentTime = 300; // 300msの位置にシーク</code></pre>
         <div><h3 class="topic-title">Container Queries</h3><p class="topic-desc">ビューポートではなく親要素のサイズに応じてスタイルを変える</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview"><code>@container</code>は親要素のサイズに基づいてスタイルを変える。<code>@media</code>がビューポート全体を見るのに対し、<code>@container</code>はコンポーネント単位でレスポンシブ制御できるため、同じコンポーネントをサイドバーに置いてもメインカラムに置いても適切にレイアウトが変わる。コンポーネント駆動設計との相性が非常に良い。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">@container 基本</div>
@@ -2979,6 +3020,7 @@ anim.currentTime = 300; // 300msの位置にシーク</code></pre>
         <div><h3 class="topic-title">Scroll-driven Animations</h3><p class="topic-desc">スクロール位置に連動したアニメーション・Scroll Snap</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">Scroll-driven AnimationsはJavaScript不要でスクロール位置に連動したアニメーションを実現できる新しいCSS API（Chrome 115+）。<code>animation-timeline: scroll()</code>でスクロール量に、<code>animation-timeline: view()</code>で要素のビューポート表示状態に連動できる。Scroll Snapと組み合わせると、CSSだけでリッチなスクロール体験を作れる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">animation-timeline: scroll()</div>
@@ -3061,6 +3103,7 @@ anim.currentTime = 300; // 300msの位置にシーク</code></pre>
         <div><h3 class="topic-title">型 / Interface / Type</h3><p class="topic-desc">基本型・Union・Intersection・interface vs type</p></div>
         <span class="topic-level beginner">Beginner</span>
       </div>
+      <p class="topic-overview">TypeScriptはJavaScriptに静的型付けを追加したスーパーセット。型エラーをコンパイル時に発見でき、エディターの補完・リファクタリング支援が格段に強力になる。<code>interface</code>はオブジェクト・クラスの型定義と宣言マージ向き、<code>type</code>はUnion・関数型・計算型に使い分けるのが一般的。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">基本型と Union / Intersection</div>
@@ -3160,6 +3203,7 @@ function format(value: string | number): string {
         <div><h3 class="topic-title">Generics</h3><p class="topic-desc">型を引数として受け取り再利用可能な型を作る</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">ジェネリクスは型をパラメータとして受け取り、型安全性を保ちながら再利用可能なコードを作る仕組み。<code>&lt;T&gt;</code>という型変数を使って関数・クラス・インターフェースを汎用的に定義できる。型引数は多くの場合コンパイラが推論するが、<code>extends</code>で制約を加えてより精密な型チェックも可能。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">ジェネリック関数</div>
@@ -3261,6 +3305,7 @@ class UserRepository implements Repository&lt;User, number&gt; {
         <div><h3 class="topic-title">Utility Types</h3><p class="topic-desc">既存の型を変換する組み込みユーティリティ</p></div>
         <span class="topic-level intermediate">Intermediate</span>
       </div>
+      <p class="topic-overview">TypeScriptには既存の型を変換・操作する組み込みのユーティリティ型が多数用意されている。<code>Partial</code>/<code>Required</code>/<code>Readonly</code>/<code>Pick</code>/<code>Omit</code>などを組み合わせることで、型定義の重複を避けながら様々なバリエーションを作れる。<code>ReturnType</code>や<code>infer</code>で実装から自動的に型を導出することで型と実装の乖離を防げる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">Partial / Required / Readonly / Record</div>
@@ -3349,6 +3394,7 @@ type Str = ArrayItem&lt;string[]&gt;; // string</code></pre>
         <div><h3 class="topic-title">型ガード / 高度な型</h3><p class="topic-desc">条件型・テンプレートリテラル型・Discriminated Union</p></div>
         <span class="topic-level advanced">Advanced</span>
       </div>
+      <p class="topic-overview">型ガードは実行時のチェックをコンパイラに伝え、ブロック内の型を自動的に絞り込む（narrowing）。Discriminated Unionはステートマシンパターンとの相性が抜群で、新しいケースを追加するとswitch文全体でコンパイルエラーが出るため安全。Conditional TypesとTemplate Literal Typesを組み合わせると、文字列パターンを型レベルで操作できる。</p>
       <div class="cards-grid">
         <div class="card reveal-card">
           <div class="card-label">型ガード</div>
