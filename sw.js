@@ -1,11 +1,15 @@
 const CACHE = 'webdev-ref-v1';
 
+// self.registration.scope = e.g. "https://junia2009.github.io/webdev-reference/"
+// → サブディレクトリ配置でも正しく解決される
+const BASE = self.registration.scope;
+
 const PRECACHE = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/manifest.webmanifest',
+  BASE,
+  BASE + 'index.html',
+  BASE + 'css/style.css',
+  BASE + 'js/app.js',
+  BASE + 'manifest.webmanifest',
 ];
 
 self.addEventListener('install', e => {
