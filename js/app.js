@@ -410,3 +410,131 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   });
 }
+
+// ── Run Buttons ───────────────────────────────────────
+(function initRunButtons() {
+  const SKIP_PATTERNS = [
+    /\bimport\b/, /\bTHREE\b/, /\brenderer\b/,
+    /getContext/, /\bfetch\s*\(/, /\bnavigator\b/,
+    /\bWorker\b/, /\bWebSocket\b/, /\bAudioContext\b/,
+    /\bindexedDB\b/, /\blocalStorage\b/, /\bdocument\b/,
+    /display:\s*(grid|flex)/, /@keyframes/, /container-type/,
+  ];
+  const SKIP_SECTION_PREFIXES = ['css-', 'html-', 'webgl-', 'three'];
+
+  function isRunnable(codeEl) {
+    const section = codeEl.closest('.topic-section');
+    if (section) {
+      const id = section.id || '';
+      if (SKIP_SECTION_PREFIXES.some(p => id.startsWith(p))) return false;
+    }
+    const code = codeEl.textContent;
+    if (SKIP_PATTERNS.some(re => re.test(code))) return false;
+    if (!code.includes('console.log')) return false;
+    // Skip blocks with syntax errors (e.g. duplicate declarations used for illustration)
+    try { new Function('console', code); } catch (e) { return false; }
+    return true;
+  }
+
+  function formatValue(v) {
+    if (v === undefined) return 'undefined';
+    if (v === null) return 'null';
+    if (typeof v === 'string') return JSON.stringify(v);
+    if (typeof v === 'object') {
+      try { return JSON.stringify(v, null, 0); } catch { return String(v); }
+    }
+    return String(v);
+  }
+
+  async function execute(code) {
+    const lines = [];
+    const mockConsole = {
+      log:   (...a) => lines.push({ type: 'log',   text: a.map(formatValue).join(' ') }),
+      warn:  (...a) => lines.push({ type: 'warn',  text: a.map(formatValue).join(' ') }),
+      error: (...a) => lines.push({ type: 'error', text: a.map(formatValue).join(' ') }),
+    };
+    try {
+      const isAsync = /\bawait\b/.test(code);
+      const wrapped = isAsync
+        ? `return (async () => { ${code} })()`
+        : code;
+      // eslint-disable-next-line no-new-func
+      const fn = new Function('console', wrapped);
+      await fn(mockConsole);
+    } catch (err) {
+      lines.push({ type: 'error', text: String(err) });
+    }
+    return lines;
+  }
+
+  function renderOutput(outputEl, lines) {
+    const body = outputEl.querySelector('.out-body');
+    if (lines.length === 0) {
+      body.innerHTML = '<div class="out-empty">（出力なし）</div>';
+      return;
+    }
+    body.innerHTML = lines.map(l => {
+      const prompt = l.type === 'error' ? '✖' : l.type === 'warn' ? '⚠' : '›';
+      return `<div class="out-line out-${l.type}"><span class="out-prompt">${prompt}</span><span>${escapeHtml(l.text)}</span></div>`;
+    }).join('');
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function initCard(codeEl) {
+    const pre = codeEl.closest('pre');
+    if (!pre) return;
+
+    // Wrap pre in a relative container
+    const wrap = document.createElement('div');
+    wrap.className = 'code-block-wrap';
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+
+    // Toolbar with run button
+    const toolbar = document.createElement('div');
+    toolbar.className = 'code-toolbar';
+    toolbar.innerHTML = '<button class="run-btn">▶ 実行</button>';
+    wrap.appendChild(toolbar);
+
+    // Output panel (hidden initially)
+    const outputEl = document.createElement('div');
+    outputEl.className = 'code-output';
+    outputEl.style.display = 'none';
+    outputEl.innerHTML = `
+      <div class="code-output-header">
+        <span>OUTPUT</span>
+        <button class="code-output-clear" title="クリア">✕</button>
+      </div>
+      <div class="out-body"></div>
+    `;
+    wrap.appendChild(outputEl);
+
+    const btn = toolbar.querySelector('.run-btn');
+    const clearBtn = outputEl.querySelector('.code-output-clear');
+
+    btn.addEventListener('click', async () => {
+      if (btn.hasAttribute('data-running')) return;
+      btn.setAttribute('data-running', '');
+      btn.textContent = '⏳';
+
+      const code = codeEl.textContent;
+      const lines = await execute(code);
+
+      btn.removeAttribute('data-running');
+      btn.textContent = '▶ 実行';
+      outputEl.style.display = '';
+      renderOutput(outputEl, lines);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      outputEl.style.display = 'none';
+    });
+  }
+
+  document.querySelectorAll('pre code').forEach(codeEl => {
+    if (isRunnable(codeEl)) initCard(codeEl);
+  });
+})();

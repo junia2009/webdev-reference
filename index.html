@@ -172,7 +172,9 @@ const evens = nums.filter(n => n % 2 === 0);
 
 // reduce: 集約
 const sum = nums.reduce((acc, n) => acc + n, 0);
-// 15</code></pre>
+// 15
+
+console.log(doubled, evens, sum);</code></pre>
           <p class="card-note"><code>map/filter/reduce</code> は不変データ操作の基本。元の配列を変更しない。</p>
         </div>
         <div class="card reveal-card">
@@ -289,9 +291,9 @@ console.log("4");          // 同期
 }
 
 const counter = makeCounter(10);
-counter.increment(); // 11
-counter.increment(); // 12
-counter.value();     // 12</code></pre>
+console.log(counter.increment()); // 11
+console.log(counter.increment()); // 12
+console.log(counter.value());     // 12</code></pre>
           <p class="card-note">クロージャにより、外部から直接アクセスできない「プライベート状態」を実現できる。</p>
         </div>
         <div class="card reveal-card">
@@ -350,7 +352,7 @@ class Dog extends Animal {
 }
 
 const d = new Dog("Rex");
-d.speak(); // "Rex barks!"</code></pre>
+console.log(d.speak()); // "Rex barks!"</code></pre>
           <p class="card-note"><code>#</code> プレフィックスでネイティブなプライベートフィールドを定義できる（ES2022）。</p>
         </div>
         <div class="card reveal-card">
@@ -364,11 +366,11 @@ Vehicle.prototype.describe = function() {
 };
 
 const car = new Vehicle("car");
-car.describe(); // "This is a car"
+console.log(car.describe()); // "This is a car"
 
 // プロトタイプチェーンを確認
-Object.getPrototypeOf(car) === Vehicle.prototype; // true
-car instanceof Vehicle; // true</code></pre>
+console.log(Object.getPrototypeOf(car) === Vehicle.prototype); // true
+console.log(car instanceof Vehicle); // true</code></pre>
           <p class="card-note">JSの全オブジェクトはプロトタイプチェーンで連結されており、<code>Object.prototype</code> が頂点。</p>
         </div>
       </div>
@@ -1561,15 +1563,15 @@ function* counter(start = 0) {
 }
 
 const gen = counter(1);
-gen.next(); // { value: 1, done: false }
-gen.next(); // { value: 2, done: false }
-gen.next(); // { value: 3, done: false }
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 3, done: false }
 
 // for...of で反復（有限ジェネレーターのみ）
 function* range(start, end) {
   for (let i = start; i &lt;= end; i++) yield i;
 }
-[...range(1, 5)]; // [1, 2, 3, 4, 5]</code></pre>
+console.log([...range(1, 5)]); // [1, 2, 3, 4, 5]</code></pre>
           <p class="card-note"><code>yield</code> は関数の実行を一時停止し、呼び出し元に値を返す。<code>next()</code> で再開する。</p>
         </div>
         <div class="card reveal-card">
@@ -1616,7 +1618,7 @@ for await (const chunk of streamData("/api/stream")) {
 }
 
 const range = new Range(1, 5);
-[...range];              // [1, 2, 3, 4, 5]
+console.log([...range]); // [1, 2, 3, 4, 5]
 for (const n of range) console.log(n);</code></pre>
           <p class="card-note"><code>Symbol.iterator</code> を実装するとスプレッド・分割代入・<code>for...of</code> がすべて使えるようになる。</p>
         </div>
